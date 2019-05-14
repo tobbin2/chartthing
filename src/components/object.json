@@ -3,13 +3,18 @@
         {
             "columns":[
                 {
-                    "primary":"pie"
+                    "primary":"pie",
+                    "primaryData":[5,2,1,15]
                 },
                 {
-                    "type":"pie"
+                    "secondary":"sampleText",
+                    "secondaryData":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"
                 },
                 {
-                    "primary":"horizontalStaple"
+                    "primary":"horizontalStaple",
+                    "primaryData":[5,2,1,32],
+                    "secondary":"sampleText",
+                    "secondaryData":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"
                 }
             ]
         },
@@ -17,27 +22,35 @@
             "columns":[
                 {
                     "primary":"horizontalStaple",
-                    "secondary":"horizontalStaple"
+                    "primaryData":[5,2,1,1],
+                    "secondary":"horizontalStaple",
+                    "secondaryData":[1,2,3]
                 },
                 {
                     "primary":"pie",
-                    "secondary":"sampleText"
+                    "primaryData":[5,2,1],
+                    "secondary":"sampleText",
+                    "secondaryData":{"percentage":"99%","header":"Rubrik","text":"this is some random text!!!!!"}
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "primary":"pie"
+                    "primary":"pie",
+                    "primaryData":[5,7,1]
                 },
                 {
-                    "primary":"horizontalStaple"
+                    "primary":"horizontalStaple",
+                    "primaryData":[5,2,32]
                 },
                 {
-                    "primary":"pie"
+                    "primary":"pie",
+                    "primaryData":[5,55,1]
                 },
                 {
-                    "primary":"pie"
+                    "primary":"pie",
+                    "primaryData":[100,70,32]
                     
                 }
             ]

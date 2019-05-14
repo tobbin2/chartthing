@@ -32,48 +32,38 @@ export class ChartWriter extends React.Component {
     }
 
     renderPart = (components,indexOfRow,indexOfColumn) => {
-        
+        console.log(components)
         let finishedComponent = []
         if(components.primary){
             finishedComponent.push(
-                <Column key={"columnOfRow"+indexOfRow+"_"+indexOfColumn}>
-                    {this.pickChartOrComponent(components.primary,5)}
+                <Column key={"columnOfRowPrimary"+indexOfRow+"_"+indexOfColumn}>
+                    {this.pickChartOrComponent(components.primary,components.primaryData)}
                 </Column>
             )
         }
         
         if(components.secondary){
+            console.log(components.secondary, " ", indexOfRow , " ", indexOfColumn)
             finishedComponent.push(
-                <Column key={"columnOfRow"+indexOfRow+"_"+indexOfColumn}>
-                    {this.pickChartOrComponent(components.secondary,5)}
+                <Column key={"columnOfRowSecondary"+indexOfRow+"_"+indexOfColumn}>
+                    {this.pickChartOrComponent(components.secondary,components.secondaryData)}
                 </Column>
             )
         }
         
         return(finishedComponent)
-        return (
-            Object.keys(components).map( (key) => {
-                return(
-                    <Column key={"columnOfRow"+indexOfRow+"_"+indexOfColumn}>
-                        {   
-                            this.pickChartOrComponent(components,key)
-                        }
-                    </Column>
-                )
-            })
-        )
     }
 
     pickChartOrComponent = (type,data) => {
         switch(type){
             case "horizontalStaple":
-                return <HorizontalBarComponentChart />
+                return <HorizontalBarComponentChart data={data}/>
             case "pie":
-                return <PieComponentChart />
+                return <PieComponentChart data={data}/>
             case "sampleText":
-                return <SampleTextComponent />
+                return <SampleTextComponent data={data}/>
             case "arrow":
-                return <ArrowComponent />
+                return <ArrowComponent data={data}/>
             default:
                 return
         }
@@ -83,7 +73,7 @@ export class ChartWriter extends React.Component {
         let values = this.renderParts()
         
         return(
-            <Column flex={"1"} justifyContent="center" style={{padding:'2%',height:'92vh'}}>
+            <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
                 {values}
             </Column>
             
