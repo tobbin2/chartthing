@@ -1,0 +1,44 @@
+{
+    "rows":[
+        {
+            "columns":[
+                {
+                    "type":"staple"
+                },
+                {
+                    "type":"line"
+                },
+                {
+                    "type":"lyingStaple"
+                }
+            ]
+        },
+        {
+            "columns":[
+                {
+                    "type":"staple"
+                },
+                {
+                    "type":"line"
+                }
+            ]
+        },
+        {
+            "columns":[
+                {
+                    "type":"staple"
+                },
+                {
+                    "type":"line"
+                },
+                {
+                    "type":"lyingStaple"
+                },
+                {
+                    "type":"line"
+                    
+                }
+            ]
+        }
+    ]
+}
