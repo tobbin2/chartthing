@@ -5,24 +5,33 @@ import { Column, Row } from 'simple-flexbox';
 export class PieComponentChart extends React.Component {
 
     _data = {}
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this._data = {
             labels: ["Red", "Green", "blue"],
             datasets:[{
-                data: [2000,4000,2850],
-                backgroundColor: ['red', 'blue', 'green']
+                data: this.props.data,
+                backgroundColor: [this.randomBlue(), this.randomBlue(), this.randomBlue()]
             }]
         }
     }
+
+    randomBlue = (extra) => {
+        let h = 180 + extra;
+        let s = 100;
+        let l = 52;
+        let color = 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
+        return color
+    }
+
     render(){
 
         return(
             <div>
-                <p>this is the pie chart</p>
                 <Pie
                     data={this._data}
-                    options={{maintainAspectRatio:true}}                  
+                    options={{maintainAspectRatio:true,devicePixelRatio:1}}      
+                                
                 />
             </div>
         )

@@ -5,8 +5,8 @@ export class ArrowComponent extends React.Component{
     render(){
         return(
             <div>
-                <h1>Arrow field</h1>
-                <p>this is supposed to represent arrows</p>
+                <h1>{this.props.data.header}</h1>
+                <p>{this.props.data.text}</p>
             </div>
         )
     }
