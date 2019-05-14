@@ -5,6 +5,7 @@ import { PieComponentChart } from './chartComponents/PieComponentChart'
 import { HorizontalBarComponentChart } from './chartComponents/HorizontalBarComponentChart'
 import { SampleTextComponent } from './chartComponents/SampleTextComponent'
 import { ArrowComponent } from './chartComponents/ArrowComponent'
+import {LineComponent} from './chartComponents/LineComponent';
 
 const data = require('./object.json') 
 
@@ -19,8 +20,11 @@ export class ChartWriter extends React.Component {
                         {
                             value.columns.map( (components,indexOfColumn) => {
                                     return(
-                                        <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent='center' alignItems='center' style={{backgroundColor:'white',margin:3,borderRadius:10}}>
-                                            {this.renderPart(components,indexOfRow,indexOfColumn)}
+                                        <Row flexGrow={1} key={"column"+indexOfRow+indexOfColumn} horizontal='center' justifyContent='center' style={{backgroundColor:'white',margin:3,borderRadius:10, }}>
+                                        {
+                                            indexOfColumn == 1 && indexOfRow == 1 ? <LineComponent /> : <div></div>
+                                        }
+                                            
                                         </Row>
                                     )
                             })
@@ -36,7 +40,7 @@ export class ChartWriter extends React.Component {
         let finishedComponent = []
         if(components.primary){
             finishedComponent.push(
-                <Column key={"columnOfRow"+indexOfRow+"_"+indexOfColumn}>
+             <Column key={"columnOfRow"+indexOfRow+"_"+indexOfColumn}>
                     {this.pickChartOrComponent(components.primary,5)}
                 </Column>
             )
@@ -74,6 +78,8 @@ export class ChartWriter extends React.Component {
                 return <SampleTextComponent />
             case "arrow":
                 return <ArrowComponent />
+                case "line":
+                return <LineComponent />
             default:
                 return
         }
@@ -85,6 +91,7 @@ export class ChartWriter extends React.Component {
         return(
             <Column flex={"1"} justifyContent="center" style={{padding:'2%',height:'92vh'}}>
                 {values}
+                
             </Column>
             
         )
