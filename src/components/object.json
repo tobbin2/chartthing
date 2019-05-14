@@ -3,39 +3,40 @@
         {
             "columns":[
                 {
-                    "type":"staple"
+                    "type":"pie"
                 },
                 {
-                    "type":"line"
+                    "type":"pie"
                 },
                 {
-                    "type":"lyingStaple"
+                    "type":"horizontalStaple"
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "type":"staple"
+                    "type":"horizontalStaple",
+                    "extraInfo":"horizontalStaple"
                 },
                 {
-                    "type":"line"
+                    "type":"pie"
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "type":"staple"
+                    "type":"pie"
                 },
                 {
-                    "type":"line"
+                    "type":"horizontalStaple"
                 },
                 {
-                    "type":"lyingStaple"
+                    "type":"pie"
                 },
                 {
-                    "type":"line"
+                    "type":"pie"
                     
                 }
             ]

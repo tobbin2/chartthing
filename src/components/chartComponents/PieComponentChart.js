@@ -16,12 +16,13 @@ export class PieComponentChart extends React.Component {
         }
     }
     render(){
-        console.log(this._data)
+
         return(
             <div>
                 <p>this is the pie chart</p>
                 <Pie
                     data={this._data}
+                    options={{maintainAspectRatio:true}}                  
                 />
             </div>
         )
