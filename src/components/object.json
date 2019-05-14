@@ -3,40 +3,41 @@
         {
             "columns":[
                 {
-                    "type":"pie"
+                    "primary":"pie"
                 },
                 {
                     "type":"pie"
                 },
                 {
-                    "type":"horizontalStaple"
+                    "primary":"horizontalStaple"
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "type":"horizontalStaple",
-                    "extraInfo":"horizontalStaple"
+                    "primary":"horizontalStaple",
+                    "secondary":"horizontalStaple"
                 },
                 {
-                    "type":"pie"
+                    "primary":"pie",
+                    "secondary":"sampleText"
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "type":"pie"
+                    "primary":"pie"
                 },
                 {
-                    "type":"horizontalStaple"
+                    "primary":"horizontalStaple"
                 },
                 {
-                    "type":"pie"
+                    "primary":"pie"
                 },
                 {
-                    "type":"pie"
+                    "primary":"pie"
                     
                 }
             ]

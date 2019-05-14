@@ -19,7 +19,6 @@ export class PieComponentChart extends React.Component {
 
         return(
             <div>
-                <p>this is the pie chart</p>
                 <Pie
                     data={this._data}
                     options={{maintainAspectRatio:true}}                  
