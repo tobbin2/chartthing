@@ -3,11 +3,11 @@
         {
             "columns":[
                 {
-                    "primary":"pie",
+                    "primary":"gradientLine",
                     "primaryData":[5,2,1,15]
                 },
                 {
-                    "secondary":"sampleText",
+                    "secondary":"arrow",
                     "secondaryData":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"
                 },
                 {

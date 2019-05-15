@@ -8,17 +8,21 @@ export class GradientLineComponentChart extends React.Component{
     constructor(props){
         super(props)
         this._data = {
-            labels: ["Rates","test","a","b"],
+            labels: ["2010","2012","2014","2016", "2018", "2020"],
             datasets:[
                 {
                     label: "Rates",
-                    backgroundColor:'red',
-                    data: [3, 5, 1 ,2 ,3]
+                    backgroundColor: 'blue',
+                    borderColor: "blue",
+                    fill: true,
+                    data: [5, 5, 1 ,2 ,7,4]
                 },
                 {  
                     label: "test",
-                    backgroundColor:'blue',
-                    data: [3, 10, 5 ,2 ,3]
+                    backgroundColor:'pink',
+                    borderColor: 'pink',
+                    fill: true,
+                    data: [1, 10, 5 ,2 ,8, 12]
                 }
             ]
         }
@@ -28,7 +32,7 @@ export class GradientLineComponentChart extends React.Component{
                 <div>
                 <Line
                     data={this._data}
-                    options={{maintainAspectRatio:true, devicePixelRatio:10}}                  
+                    options={{maintainAspectRatio:true,legend:false, devicePixelRatio:70}}                  
                 />
             </div>
             )
