@@ -4,7 +4,7 @@ import { ChartWriter } from './components/ChartWriter'
 
 function App() {
   return (
-    <div style={{backgroundColor:'#284a82'}}>
+    <div style={{backgroundColor:'#023F62'}}>
       <ChartWriter/>
     </div>
   );

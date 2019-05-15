@@ -1,6 +1,15 @@
 import * as React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
-import { Column, Row } from 'simple-flexbox'
+import { Row,Column } from 'simple-flexbox'
+import { randomBlue } from './randomBlueFunction'
+
+const textStyleClass = {
+    color:'#1C83B0',
+    fontFamily:'Verdana',
+    fontWeight:500,
+    width:'100%',
+    marginBottom:'0'
+}
 
 export class HorizontalBarComponentChart extends React.Component{
 
@@ -8,32 +17,41 @@ export class HorizontalBarComponentChart extends React.Component{
     constructor(props){
         super(props)
 
-        console.log(this.props.data)
+        let colors = []
+
+        for(let i= 0 ; i < this.props.data.data.length;i++){
+            colors.push(randomBlue(5 * i))
+        }
+
         this._data = {
-            labels: ["Red", "Green", "blue","orange"],
+            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
             datasets:[{
-                data: this.props.data,
-                backgroundColor: ['red', 'blue', 'green','orange']
+                data: this.props.data.data,
+                backgroundColor: colors
             }]
         }
 
     }
 
-    renderHorizontalBar = () => {
-        return (
-            <HorizontalBar
-                data={this._data}
-                options={{maintainAspectRatio:false}}
-          
-            />
+    createHeader = (text) => {
+        return(
+            <Row>
+                <h2 style={textStyleClass}>{text}</h2>
+            </Row>
         )
     }
 
     render(){
         return(
-            <div>
-                {this.renderHorizontalBar()}   
-            </div>
+            <Column>
+                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+                <Row>
+                <HorizontalBar
+                    data={this._data}
+                    options={{ legend:false, scales: {xAxes: [{ticks: { beginAtZero: true }}]}}}
+                />
+                </Row>
+            </Column>
         )
     }
 
