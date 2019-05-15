@@ -7,11 +7,13 @@ export class HorizontalBarComponentChart extends React.Component{
     _data = {}
     constructor(props){
         super(props)
+
+        console.log(this.props.data)
         this._data = {
-            labels: ["Red", "Green", "blue"],
+            labels: ["Red", "Green", "blue","orange"],
             datasets:[{
-                data: [3000,4000,2850],
-                backgroundColor: ['red', 'blue', 'green']
+                data: this.props.data,
+                backgroundColor: ['red', 'blue', 'green','orange']
             }]
         }
 
