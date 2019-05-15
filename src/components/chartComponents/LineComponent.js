@@ -2,57 +2,62 @@ import * as React from "react";
 import { Line } from "react-chartjs-2";
 import { Column, Row } from "simple-flexbox";
 
+import { randomBlue } from './randomBlueFunction';
+
+const textStyleClass = {
+  color:'#1C83B0',
+  fontFamily:'Verdana',
+  fontWeight:500,
+  width:'100%',
+  marginBottom:'0'
+}
+
 export class LineComponent extends React.Component {
+
   _data = {};
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
+
+    let colors = []
+
+    for(let i= 0 ; i < this.props.data.data.length;i++){
+      colors.push(randomBlue(5 * i))
+    }
+
     this._data = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [
-        {
-          label: "Data",
-          backgroundColor: "rgba(rgba(44, 79, 150, 1)",
-          fill: false,
-          borderColor: "rgba(255,99,132,1)",
+      labels: this.props.data.labels !== undefined ? this.props.data.labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Okt","Nov","Dev"],
+      datasets: this.props.data.data.map( (object,index) => {
+        return({
+          label: object.label,
+          borderColor: colors[index],
+          fill:false,
           borderWidth: 1,
-          hoverBackgroundColor: "rgba(32,78,255,1)",
-          pointBorderColor: "rgba(32,78,255,1)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-          borderColor: "rgba(32,78,255,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: "Data2",
-          backgroundColor: "rgba(rgba(44, 79, 150, 1)",
-          fill: false,
-          borderColor: "rgba(255,99,132,1)",
-          borderWidth: 1,
-          hoverBackgroundColor: "rgba(32,78,255,1)",
-          pointBorderColor: "rgba(32,78,255,1)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-          borderColor: "rgba(32,78,255,1)",
-          data: [80, 45, 17, 21, 90, 42, 14]
-        },
-        {
-          label: "Data3",
-          backgroundColor: "rgba(rgba(44, 79, 150, 1)",
-          fill: false,
-          borderColor: "rgba(255,99,132,1)",
-          borderWidth: 1,
-          hoverBackgroundColor: "rgba(32,78,255,1)",
-          pointBorderColor: "rgba(32,78,255,1)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-          borderColor: "rgba(32,78,255,1)",
-          data: [12, 30, 16, 10, 75, 90, 25]
-        }
-      ]
+          data: object.data
+        })
+      })
     };
   }
-  render() {
-    return (
-      <div>
-        <Line data={this._data} options={{legend:false, maintainAspectRatio: true }} />
-      </div>
-    );
+
+  createHeader = (text) => {
+    return(
+        <Row>
+            <h2 style={textStyleClass}>{text}</h2>
+        </Row>
+    )
   }
-}
+
+  render() {
+      return(
+        <Column>
+            {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
+            <Row>
+            <Line
+                data={this._data}
+                options={{ legend:false }}
+            />
+            </Row>
+        </Column>
+      )
+  }   
+} 

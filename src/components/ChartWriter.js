@@ -6,10 +6,9 @@ import { HorizontalBarComponentChart } from './chartComponents/HorizontalBarComp
 import { SampleTextComponent } from './chartComponents/SampleTextComponent'
 import { DoughnutComponentChart } from './chartComponents/DoughnutComponentChart'
 import { RadarComponentChart } from './chartComponents/RadarComponentChart'
-
 import { ArrowComponent } from './chartComponents/ArrowComponent'
 import { PolarareaComponentChart } from "./chartComponents/PolarareaComponentChart";
-import {LineComponent} from './chartComponents/LineComponent';
+import { LineComponent } from './chartComponents/LineComponent';
 import { GradientLineComponentChart } from './chartComponents/GradientLineComponentChart'
 
 const data = require('./object.json') 
@@ -75,9 +74,9 @@ export class ChartWriter extends React.Component {
             case "sampleText":
                 return <SampleTextComponent data={data}/>
             case "arrow":
-                return <ArrowComponent />
+                return <ArrowComponent data={data} />
             case "line":
-                return <LineComponent />
+                return <LineComponent data={data}/>
             case "gradientLine":
                 return <GradientLineComponentChart data={data} />
             default:

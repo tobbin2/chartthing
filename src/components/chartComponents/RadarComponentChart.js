@@ -26,7 +26,7 @@ export class RadarComponentChart extends React.Component{
         }
 
         this._data = {
-            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
                 data: this.props.data.data,
                 backgroundColor: colors
@@ -44,7 +44,7 @@ export class RadarComponentChart extends React.Component{
     render(){
         return(
             <div>
-                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Radar
                     data={this._data}
                     options={{legend:false}}
