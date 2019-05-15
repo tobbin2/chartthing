@@ -39,7 +39,7 @@ export class SampleTextComponent extends React.Component{
     render(){
         return(
             <div>
-                {this.components}
+             
             </div>
         )
     }

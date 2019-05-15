@@ -25,12 +25,6 @@
                     "primaryData":[5,2,1,1],
                     "secondary":"horizontalStaple",
                     "secondaryData":[1,2,3]
-                },
-                {
-                    "primary":"pie",
-                    "primaryData":[5,2,1],
-                    "secondary":"sampleText",
-                    "secondaryData":{"percentage":"99%","header":"Rubrik","text":"this is some random text!!!!!"}
                 }
             ]
         },
