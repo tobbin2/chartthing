@@ -20,7 +20,7 @@
                     "secondary":"horizontalStaple"
                 },
                 {
-                    "primary":"pie",
+                    "primary":"line",
                     "secondary":"sampleText"
                 }
             ]

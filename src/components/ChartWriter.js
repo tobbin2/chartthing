@@ -21,9 +21,10 @@ export class ChartWriter extends React.Component {
                             value.columns.map( (components,indexOfColumn) => {
                                     return(
                                         <Row flexGrow={1} key={"column"+indexOfRow+indexOfColumn} horizontal='center' justifyContent='center' style={{backgroundColor:'white',margin:3,borderRadius:10, }}>
-                                        {
-                                            indexOfColumn == 1 && indexOfRow == 1 ? <LineComponent /> : <div></div>
-                                        }
+                                        
+                                            {this.renderPart(components,indexOfRow,indexOfColumn)}
+                                            
+                                        
                                             
                                         </Row>
                                     )
