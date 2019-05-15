@@ -5,6 +5,7 @@ import { PieComponentChart } from './chartComponents/PieComponentChart'
 import { HorizontalBarComponentChart } from './chartComponents/HorizontalBarComponentChart'
 import { SampleTextComponent } from './chartComponents/SampleTextComponent'
 import { ArrowComponent } from './chartComponents/ArrowComponent'
+import { GradientLineComponentChart } from './chartComponents/GradientLineComponentChart'
 
 const data = require('./object.json') 
 
@@ -64,6 +65,8 @@ export class ChartWriter extends React.Component {
                 return <SampleTextComponent data={data}/>
             case "arrow":
                 return <ArrowComponent data={data}/>
+            case "gradientLine":
+                return <GradientLineComponentChart data={data} />
             default:
                 return
         }
