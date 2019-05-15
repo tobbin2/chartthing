@@ -9,6 +9,8 @@ import { RadarComponentChart } from './chartComponents/RadarComponentChart'
 
 import { ArrowComponent } from './chartComponents/ArrowComponent'
 import { PolarareaComponentChart } from "./chartComponents/PolarareaComponentChart";
+import {LineComponent} from './chartComponents/LineComponent';
+import { GradientLineComponentChart } from './chartComponents/GradientLineComponentChart'
 
 const data = require('./object.json') 
 
@@ -24,7 +26,7 @@ export class ChartWriter extends React.Component {
                             value.columns.map( (components,indexOfColumn) => {
                                     return(
                                         <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent='center' alignItems='center' horizontal='around' style={{backgroundColor:'white',margin:3,borderRadius:10}}>
-                                            {this.renderPart(components,indexOfRow,indexOfColumn)}
+                                            {this.renderPart(components,indexOfRow,indexOfColumn)}   
                                         </Row>
                                     )
                             })
@@ -73,7 +75,11 @@ export class ChartWriter extends React.Component {
             case "sampleText":
                 return <SampleTextComponent data={data}/>
             case "arrow":
-                return <ArrowComponent data={data}/>
+                return <ArrowComponent />
+            case "line":
+                return <LineComponent />
+            case "gradientLine":
+                return <GradientLineComponentChart data={data} />
             default:
                 return
         }
@@ -85,6 +91,7 @@ export class ChartWriter extends React.Component {
         return(
             <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
                 {values}
+                
             </Column>
             
         )
