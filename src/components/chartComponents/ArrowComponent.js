@@ -5,7 +5,7 @@ export class ArrowComponent extends React.Component{
     render(){
         return(
             <div>
-                <h1>{this.props.data.header}</h1>
+                <h2>{this.props.data.header}</h2>
                 <p>{this.props.data.text}</p>
             </div>
         )

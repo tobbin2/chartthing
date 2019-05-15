@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { Pie } from 'react-chartjs-2';
-import { Column, Row} from 'simple-flexbox'
-
+import { Doughnut } from 'react-chartjs-2'
+import { Row,Column } from 'simple-flexbox'
 import { randomBlue } from './randomBlueFunction'
 
 const textStyleClass = {
@@ -13,13 +12,13 @@ const textStyleClass = {
     marginBottom:'0'
 }
 
-export class PieComponentChart extends React.Component {
+export class DoughnutComponentChart extends React.Component{
 
     _data = {}
     constructor(props){
         super(props)
+
         let colors = []
-        
 
         for(let i= 0 ; i < this.props.data.data.length;i++){
             colors.push(randomBlue(5 * i))
@@ -32,6 +31,7 @@ export class PieComponentChart extends React.Component {
                 backgroundColor: colors
             }]
         }
+
     }
 
     createHeader = (text) => {
@@ -43,18 +43,16 @@ export class PieComponentChart extends React.Component {
     }
 
     render(){
-
         return(
-           <Column>
+            <Column>
                 {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
-                    <Pie
-                        data={this._data}
-                        options={{maintainAspectRatio:true,devicePixelRatio:1,responsive:true}}      
-                                    
-                    />
+                <Doughnut
+                    data={this._data}
+                />
                 </Row>
             </Column>
         )
     }
+
 }

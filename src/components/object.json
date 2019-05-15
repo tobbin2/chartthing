@@ -3,54 +3,54 @@
         {
             "columns":[
                 {
-                    "primary":"pie",
-                    "primaryData":[5,2,1,15]
+                    "primary":"radar",
+                    "primaryData":{"data":[5,2,1], "labels":["test1","test2","test3"], "header":"sample Text"}
                 },
                 {
                     "secondary":"sampleText",
-                    "secondaryData":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"
+                    "secondaryData":{"percentage":"99%","text":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write","align":"center"}
                 },
                 {
                     "primary":"horizontalStaple",
-                    "primaryData":[5,2,1,32],
+                    "primaryData":{"data":[5,3], "labels":["test1","test2"], "header":"sample Text"},
                     "secondary":"sampleText",
-                    "secondaryData":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"
+                    "secondaryData":{"header":"Sample Text","percentage":"99%","text":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"}
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "primary":"horizontalStaple",
-                    "primaryData":[5,2,1,1],
-                    "secondary":"horizontalStaple",
-                    "secondaryData":[1,2,3]
+                    "primary":"polar",
+                    "primaryData":{"data":[5,2,1,6,4,3], "labels":["test1","test2","test3","test4","test5","test6"]},
+                    "secondary":"polar",
+                    "secondaryData":{"data":[5,2,1,7,4,3,2,1,3], "header":"header"}
                 },
                 {
                     "primary":"pie",
-                    "primaryData":[5,2,1],
+                    "primaryData":{"data":[5,2,1,15], "labels":["test1","test2","test3","test4"], "header":"sample Text"},
                     "secondary":"sampleText",
-                    "secondaryData":{"percentage":"99%","header":"Rubrik","text":"this is some random text!!!!!"}
+                    "secondaryData":{"text":"testar123123","header":"Sample Text","align":"right"}
                 }
             ]
         },
         {
             "columns":[
                 {
-                    "primary":"pie",
-                    "primaryData":[5,7,1]
+                    "primary":"polar",
+                    "primaryData":{"data":[5,2,1], "text":"sample Text"}
                 },
                 {
                     "primary":"horizontalStaple",
-                    "primaryData":[5,2,32]
+                    "primaryData":{"data":[5,2,1,15,4,3,2,1,3], "labels":["test1","test2","test3","test4","test5","test6","test7","test8","test9"], "header":"sample Text"}
                 },
                 {
                     "primary":"pie",
-                    "primaryData":[5,55,1]
+                    "primaryData":{"data":[5,2,52,15], "labels":["test1","test2","test3","test4"], "text":"sample Text"}
                 },
                 {
-                    "primary":"pie",
-                    "primaryData":[100,70,32]
+                    "primary":"doughnut",
+                    "primaryData":{"data":[2,2,1,3], "labels":["test1","test2","test3","test4"], "text":"sample Text"}
                     
                 }
             ]
