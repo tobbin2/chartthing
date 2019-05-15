@@ -24,7 +24,7 @@ export class HorizontalBarComponentChart extends React.Component{
         }
 
         this._data = {
-            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
                 data: this.props.data.data,
                 backgroundColor: colors
@@ -44,7 +44,7 @@ export class HorizontalBarComponentChart extends React.Component{
     render(){
         return(
             <Column>
-                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
                 <HorizontalBar
                     data={this._data}

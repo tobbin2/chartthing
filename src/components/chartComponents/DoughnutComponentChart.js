@@ -25,7 +25,7 @@ export class DoughnutComponentChart extends React.Component{
         }
 
         this._data = {
-            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
                 data: this.props.data.data,
                 backgroundColor: colors
@@ -45,7 +45,7 @@ export class DoughnutComponentChart extends React.Component{
     render(){
         return(
             <Column>
-                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
                 <Doughnut
                     data={this._data}
