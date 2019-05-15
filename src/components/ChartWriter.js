@@ -20,7 +20,7 @@ export class ChartWriter extends React.Component {
                         {
                             value.columns.map( (components,indexOfColumn) => {
                                     return(
-                                        <Row flexGrow={1} key={"column"+indexOfRow+indexOfColumn} horizontal='center' justifyContent='center' style={{backgroundColor:'white',margin:3,borderRadius:10, }}>
+                                        <Row flexGrow={1} wrap={true} key={"column"+indexOfRow+indexOfColumn} horizontal='center' justifyContent='center' style={{backgroundColor:'white',margin:3,borderRadius:10, }}>
                                         
                                             {this.renderPart(components,indexOfRow,indexOfColumn)}
                                             
