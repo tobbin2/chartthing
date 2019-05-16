@@ -38,7 +38,7 @@
                             "data":["10","0","20","2"],
                             "label":"test1"
                         }
-                    ], "header":"sample Text"},
+                    ]},
                     "secondary":"sampleText",
                     "secondaryData":{"header":"Sample Text","percentage":"99%","text":"this is some random text about litteraly nothing, since we can't figure out something to write so this is what happens if you can't figure out what to write"}
                 }

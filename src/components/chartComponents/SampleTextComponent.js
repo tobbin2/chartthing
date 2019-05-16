@@ -24,7 +24,7 @@ export class SampleTextComponent extends React.Component{
 
     createHeader = (text) => {
         return(
-            <h1 style={{color:'#1C83B0',fontFamily:'Verdana',marginTop:0,fontWeight:400, textAlign:this.alignText}}>{text}</h1>
+            <h1 style={{color:'#1C83B0',fontFamily:'Verdana',fontWeight:400, textAlign:this.alignText}}>{text}</h1>
         )
     }
 
