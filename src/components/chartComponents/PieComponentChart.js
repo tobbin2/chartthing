@@ -36,20 +36,12 @@ export class PieComponentChart extends React.Component {
             }]
         }
 
-        for(let value of this.props.data.data){
+        for(let i = 0 ; i < this.props.data.data.length; i++){
             this._pieChartData.push({
-                name:"dawda",
-                value:value,
-                xStart:0,
-                yStart:0,
-                xEnd:0,
-                yEnd:0,
-                midAngle:0
+                name:this.props.data.labels[i],
+                value:this.props.data.data[i]
             })
         }
-
-
-
     }
 
     createHeader = (text) => {
@@ -61,8 +53,8 @@ export class PieComponentChart extends React.Component {
     }
 
     renderDangerous = () => {
-        console.log(makePiechart(200,200,this._pieChartData,true,false))
-        return <span dangerouslySetInnerHTML={{__html:"<div>" + makePiechart(200,200,this._pieChartData,true,false) + "</div>"}} />;
+        //console.log(makePiechart(200,200,this._pieChartData,true,false).outerHTML);
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makePiechart(200,200,this._pieChartData,false,true).outerHTML}} />;
     }
     
 
@@ -70,8 +62,7 @@ export class PieComponentChart extends React.Component {
         let a = React.createElement("html")
 
         return(
-            <Column>
-                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+            <Column alignItems="center" justifyContent='center'>
                 <Row>
                     {this.renderDangerous()}
                     
