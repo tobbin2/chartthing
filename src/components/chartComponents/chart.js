@@ -1,6 +1,17 @@
-var animationDuration = 0.5;
+import * as React from 'react'
 
-makeSvg = function(width,height) {
+/*export function makeFakeObject() {
+    
+    let obj = {
+        dict: {},
+        setAttribute: function(key, value) {
+            this.dict[key] = value;
+        }
+    };
+    return obj;
+}*/
+
+export function makeSvg(width,height) {
     let svg = document.createElementNS(`http://www.w3.org/2000/svg`, `svg`);
     svg.setAttribute(`width`, width);
     svg.setAttribute(`height`, height);
@@ -8,7 +19,7 @@ makeSvg = function(width,height) {
     return svg;
 }
 
-makeCircle = function(x,y,r,color){
+export function makeCircle(x,y,r,color){
     var circle = document.createElementNS(`http://www.w3.org/2000/svg`, `circle`);
     circle.setAttribute(`cx`, x);
     circle.setAttribute(`cy`, y);
@@ -18,10 +29,11 @@ makeCircle = function(x,y,r,color){
     return circle;
 }
 
-makeSlice = function(radius, xStart,yStart,xEnd,yEnd,percent,color){
+export function makeSlice(xStart,yStart,xEnd,yEnd,percent,color){
     var slice = document.createElementNS(`http://www.w3.org/2000/svg`, `path`);
-    const xRadius = radius;
-    const yRadius = radius;
+
+    const xRadius = 1;
+    const yRadius = 1;
     const xAxisRotation = 0;
     const largeArcFlag = (percent <= 0.5 ? `0` : `1`);
     const sweepFlag = 1;
@@ -34,8 +46,7 @@ makeSlice = function(radius, xStart,yStart,xEnd,yEnd,percent,color){
     return slice;
 }
 
-
-makeRectangle = function(x,y,width,height,color) {
+export function makeRectangle(width,height,x,y,color) {
     var box = document.createElementNS(`http://www.w3.org/2000/svg`, `rect`);
     box.setAttribute(`width`, width);
     box.setAttribute(`height`, height);
@@ -46,7 +57,7 @@ makeRectangle = function(x,y,width,height,color) {
     return box;
 }
 
-makeText = function(x,y,color) {
+export function makeText(x,y,color) {
     var text = document.createElementNS(`http://www.w3.org/2000/svg`, `text`);
     text.setAttribute(`x`, x);
     text.setAttribute(`y`, y);
@@ -55,57 +66,36 @@ makeText = function(x,y,color) {
     return text;
 }
 
-makeLine = function(x1,y1,x2,y2,width,color){
+export function makeLine(x1,y1,x2,y2,width,color){
     var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-
     line.setAttribute("x1", x1);
     line.setAttribute("y1", y1);
     line.setAttribute("x2", x2);
     line.setAttribute("y2", y2);
-
     line.setAttribute("style", `stroke:${color};stroke-width:${width}`);
 
     return line;
 }
 
-makeAnimation = function(attributeName,from,to,animationDuration,delay){
-    var animate = document.createElementNS(`http://www.w3.org/2000/svg`, `animate`);
-    animate.setAttribute("attributeName",attributeName);
-    animate.setAttribute("from",from);
-    animate.setAttribute("to",to);
-    animate.setAttribute("dur",animationDuration);
-    animate.setAttribute("keyTimes","0;1");
-    animate.setAttribute("calcMode","spline");
-    //animate.setAttribute("keySplines",".65 .15 .35 .85");
-    animate.setAttribute("keySplines",".3 0 .3 1");
-    animate.setAttribute("begin",delay);
-    animate.setAttribute("fill","freeze");
+export function graphColors(amount){
+    let startColor = {r:0,g:71,b:122};
+    let endColor = {r:0,g:226,b:242};
 
-    return animate;
-}
-
-
-graphColors = function(amount){
-
-    startColor = new Color(0,71,122);
-    endColor = new Color(0,226,242);
-
-
-    colors = [];
+    let colors = [];
     for(var i = 0; i < amount; i++){
-        rColor = Math.round(startColor.r + (i+1)*((endColor.r-startColor.r)/(amount+1)));
-        gColor = Math.round(startColor.g + (i+1)*((endColor.g-startColor.g)/(amount+1)));
-        bColor = Math.round(startColor.b + (i+1)*((endColor.b-startColor.b)/(amount+1)));
+        let rColor = Math.round(startColor.r + (i+1)*((endColor.r-startColor.r)/(amount+1)));
+        let gColor = Math.round(startColor.g + (i+1)*((endColor.g-startColor.g)/(amount+1)));
+        let bColor = Math.round(startColor.b + (i+1)*((endColor.b-startColor.b)/(amount+1)));
 
-        rHex = rColor.toString(16);
+        let rHex = rColor.toString(16);
         if(rHex.length < 2){
             rHex = `0` + rHex;
         }
-        gHex = gColor.toString(16);
+        let gHex = gColor.toString(16);
         if(gHex.length < 2){
             gHex = `0` + gHex;
         }
-        bHex = bColor.toString(16);
+        let bHex = bColor.toString(16);
         if(bHex.length < 2){
             bHex = `0` + bHex;
         }
@@ -115,88 +105,83 @@ graphColors = function(amount){
     return colors;
 }
 
-makePiechart = function(width, height, pieDataPoints, doSort, showText){
+export function makePiechart(width, height, pieDataPoints, doSort, showText){
     if(doSort){
         pieDataPoints.sort(function(a,b){return a.value-b.value}).reverse();
     }
+    var xStart;
+    var yStart;
+    var xEnd;
+    var yEnd;
+    var midAngle;
+
 
     var svg = makeSvg(width, height);
     svg.setAttribute(`viewBox`, `-1 -1 2 2`);
     svg.setAttribute(`style`, `transform: rotate(-0.25turn)`);
 
-    var radius = 1;
-    angle = 0;
-    valueSum = 0;
+    let angle = 0;
+    let valueSum = 0;
 
-    for(pieDataPoint of pieDataPoints){
+    for(let pieDataPoint of pieDataPoints){
         valueSum += pieDataPoint.value;
     }
 
-    colors = graphColors(pieDataPoints.length);
+    let colors = graphColors(pieDataPoints.length);
 
     for(var i = 0; i < pieDataPoints.length; i++){
-        pieDataPoint = pieDataPoints[i];
+        let pieDataPoint = pieDataPoints[i];
 
         if(i==0){
-            pieDataPoint.xStart = 0;
-            pieDataPoint.yStart = radius;
+            xStart = 0;
+            yStart = 1;
         }
         else{
-            pieDataPoint.xStart = pieDataPoints[i-1].xEnd;
-            pieDataPoint.yStart = pieDataPoints[i-1].yEnd;
+            xStart = xEnd;
+            yStart = yEnd;
         }
-        thisAngle = 2*Math.PI*(pieDataPoint.value/valueSum)
+
+        let thisAngle = 2*Math.PI*(pieDataPoint.value/valueSum);
         angle += thisAngle;
-        pieDataPoint.midAngle = angle - thisAngle/2;
-        pieDataPoint.yEnd = Math.cos(angle) * radius;
-        pieDataPoint.xEnd = Math.sin(angle) * radius;
+        yEnd = Math.cos(angle);
+        xEnd = Math.sin(angle);
 
-        var slice = makeSlice(radius, pieDataPoint.xStart,pieDataPoint.yStart,pieDataPoint.xEnd,pieDataPoint.yEnd,pieDataPoint.value/valueSum, colors[i]);
-        
-        slice.appendChild(makeAnimation("d",makeSlice(0, 0,0,0,0,pieDataPoint.value/valueSum, colors[i]).getAttribute("d"),slice.getAttribute("d"),animationDuration,0));
-
-        svg.appendChild(slice);
-
-        
-        if(showText) {
-            textRadius = 0.7;
+        svg.appendChild(makeSlice(xStart,yStart,xEnd,yEnd,pieDataPoint.value/valueSum, colors[i]));   
+    
+        if(showText){
+            let radius = 0.7;
             midAngle = angle - thisAngle/2;
-            x=textRadius*Math.cos(midAngle);
-            y=textRadius*Math.sin(midAngle);
-            var textSize = height/2000;
+            let x=radius*Math.cos(midAngle);
+            let y=radius*Math.sin(midAngle);
 
             var text = makeText(x,y,"white");
 
             text.setAttribute(`text-anchor`,`middle`);
-            text.setAttribute(`style`, `font: normal ${0}px sans-serif`);
+            text.setAttribute(`style`, `font: normal ${height/2000}px sans-serif`);
             text.setAttribute(`transform`, `rotate(90 ${x} ${y})`);
             text.innerHTML = pieDataPoints[i].value;
-            //text.appendChild(makeAnimation("x",0.2,x,animationDuration,0));
-            //text.appendChild(makeAnimation("y",0.1,y,animationDuration,0));
-            text.appendChild(makeAnimation("font-size",0,textSize,animationDuration/2,animationDuration/2));
-            
 
             svg.appendChild(text);
         }
     }
+
     return svg;
 }
 
-makeBarChart = function(totalWidth,height,barDataPoints,doSort,showText){
+export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
     if(doSort) {
         barDataPoints.sort(function(a, b){return a.value - b.value}).reverse();
     }
     
-
     var svg = makeSvg(totalWidth, height);
     var barAmount = barDataPoints.length;
     var colors = graphColors(barDataPoints.length);
     var textSize = (totalWidth+height)/40;
     var textSpace = -(height/40);
     var marginTop = showText ? 0.8 : 0.95;
-    var biggestValue = 0;
     
-    for(i = 0; i < barAmount; i++){
+    var biggestValue = 0;
+    for(let i = 0; i < barAmount; i++){
         if(barDataPoints[i].value > biggestValue)
         {
             biggestValue = barDataPoints[i].value;
@@ -207,16 +192,13 @@ makeBarChart = function(totalWidth,height,barDataPoints,doSort,showText){
     if(biggestValue/5 < 1){
         marginLeft = Math.ceil(Math.abs(Math.log10(biggestValue/5)) + 2)*0.035;
     }
+
     var width = totalWidth - marginLeft*totalWidth;
     var f = height / biggestValue;
     f = f * marginTop;
 
-
     backgroundLines(svg,biggestValue,totalWidth,height,height*(1-marginTop),0,0,marginLeft);
 
-    
-    
-    
     switch(barAmount)
     {
         case 1:
@@ -245,7 +227,7 @@ makeBarChart = function(totalWidth,height,barDataPoints,doSort,showText){
         var spaceWidth = (width * spacePercent) / (barAmount + 1)
     }
 
-    for(i = 0; i < barAmount; i++) {
+    for(let i = 0; i < barAmount; i++) {
         let barHeight = f * barDataPoints[i].value;
 
         let barXPos = (i + 1) * spaceWidth + (i * barWidth) + marginLeft*totalWidth;
@@ -256,27 +238,16 @@ makeBarChart = function(totalWidth,height,barDataPoints,doSort,showText){
             valueText.innerHTML = barDataPoints[i].value; 
             valueText.setAttribute(`text-anchor`, `middle`); 
             valueText.setAttribute(`style`, `font: normal ${textSize}px arial`);  
-            valueText.appendChild(makeAnimation("y",height + textSpace, (barYPos + textSpace), animationDuration,0));
             svg.appendChild(valueText);
         }
-
-        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, colors[i]);
         
-
-        
-        rect.appendChild(makeAnimation("height",0, barHeight, animationDuration,0));
-        rect.appendChild(makeAnimation("y",height, height - barHeight, animationDuration,0));
-        
-        svg.appendChild(rect);
-        
+        svg.appendChild(makeRectangle(barWidth, barHeight, barXPos, barYPos, colors[i]));
     }
-
-    
 
     return svg;
 }
 
-makeHorizontalBarChart = function(width, height, barHorizontalData, doSort, showText) {
+export function makeHorizontalBarChart(width, height, barHorizontalData, doSort, showText) {
     var svg = makeSvg(width, height);
     var textSize = (height+width)/40;
 
@@ -294,11 +265,11 @@ makeHorizontalBarChart = function(width, height, barHorizontalData, doSort, show
         }).reverse();
     }
 
-    barsPercent = 0.5;
-    spacePercent = 1-barsPercent;
+    let barsPercent = 0.5;
+    let spacePercent = 1-barsPercent;
 
-    barHeight = (barsPercent*height)/barHorizontalData.length;
-    spaceHeight = (spacePercent*height)/(barHorizontalData.length+1);
+    let barHeight = (barsPercent*height)/barHorizontalData.length;
+    let spaceHeight = (spacePercent*height)/(barHorizontalData.length+1);
     
     var biggestTotalValue = 0;
 
@@ -312,18 +283,17 @@ makeHorizontalBarChart = function(width, height, barHorizontalData, doSort, show
         }
     }
 
+    console.log(`Biggest total value: ` + biggestTotalValue);
     var f = width / biggestTotalValue;
 
     var currentYPos = spaceHeight;
     for (var i = 0; i < barHorizontalData.length; i++) {
         var currentXPos = 0;
-        var numberOfSections = barHorizontalData[i].barWidth.length
-        var colors = graphColors(numberOfSections);
+        var colors = graphColors(barHorizontalData[i].barWidth.length);
 
         for (let j = 0; j < barHorizontalData[i].barWidth.length; j++) {
             
-            var barWidth = barHorizontalData[i].barWidth[j];
-            var rectangle = makeRectangle(currentXPos,currentYPos,barWidth * f, barHeight, colors[j]);
+            var rectangle = makeRectangle(barHorizontalData[i].barWidth[j] * f, barHeight, currentXPos, currentYPos, colors[j]);
             svg.appendChild(rectangle);
             
             if (showText){
@@ -341,133 +311,68 @@ makeHorizontalBarChart = function(width, height, barHorizontalData, doSort, show
         currentYPos += (spaceHeight + barHeight);
     }
 
-    var animationRectangle = makeRectangle(0,0,width,height,"white");
-    animationRectangle.appendChild(makeAnimation("width",width,0,animationDuration,0));
-    animationRectangle.appendChild(makeAnimation("x",0,width,animationDuration,0));
-    svg.appendChild(animationRectangle);
-
     return svg;
 }
 
+export function makeLineChart(width, height, lines){
+    let svg = makeSvg(width,height);
+    let colors = graphColors(lines.length);
 
+    let xMargin = 0.1*width;
+    let yMargin = 0.1*height;
 
-makeLineChart = function(width, height, lines){
-    svg = makeSvg(width,height);
-    colors = graphColors(lines.length);
+    let topCoord = topCoord(lines);
+    let xFactor = (width-xMargin)/topCoord.x;
+    let yFactor = (height-yMargin)/topCoord.y;
 
-    xMargin = 0.1*width;
-    yMargin = 0.1*height;
-    var circleSize = height/40;
-
-    var topCoord = getTopCoord(lines);
-    xFactor = (width-xMargin)/topCoord.x;
-    yFactor = (height-yMargin)/topCoord.y;
-
-    for(i = 0; i < lines.length; i++){
+    for(let i = 0; i < lines.length; i++){
         var line = lines[i];
 
-        animationDuration /= (line.length-1);
-
-        let circle = makeCircle(xMargin/2 + line[0].x*xFactor, height - yMargin/2 - line[0].y*yFactor, 0, colors[i]);
-        circle.appendChild(makeAnimation("r", 0, circleSize, animationDuration/5,0));
-        svg.appendChild(circle);
+        svg.appendChild(makeCircle(xMargin/2 + line[0].x*xFactor, height - yMargin/2 - line[0].y*yFactor, height/40, colors[i]));
         
-        for(j = 1; j < line.length; j++){
-            coordPrev = line[j-1];
-            coordCurr = line[j];
+        for(let j = 1; j < line.length; j++){
+            let coordPrev = line[j-1];
+            let coordCurr = line[j];
 
-            x1 = xMargin/2 + coordPrev.x*xFactor;
-            y1 = height - yMargin/2 - coordPrev.y*yFactor;
-            x2 = xMargin/2 + coordCurr.x*xFactor;
-            y2 = height - yMargin/2 - coordCurr.y*yFactor;
+            let x1 = xMargin/2 + coordPrev.x*xFactor;
+            let y1 = height - yMargin/2 - coordPrev.y*yFactor;
+            let x2 = xMargin/2 + coordCurr.x*xFactor;
+            let y2 = height - yMargin/2 - coordCurr.y*yFactor;
 
-            let circle = makeCircle(x2, y2, 0, colors[i])
-            circle.appendChild(makeAnimation("r", 0, circleSize, animationDuration/5,animationDuration*(j)));
-            svg.appendChild(circle);
+            svg.appendChild(makeCircle(x2, y2, height/40, colors[i]));
 
-            let lineWidth = height/50;
-            let svgLine = makeLine(x1,y1,x1,y1,lineWidth,colors[i]);
-            svgLine.appendChild(makeAnimation("x2",x1,x2,animationDuration,animationDuration*(j-1)));
-            svgLine.appendChild(makeAnimation("y2",y1,y2,animationDuration,animationDuration*(j-1)));
-            svg.appendChild(svgLine);
+            svg.appendChild(makeLine(x1,y1,x2,y2,height/50,colors[i]));
         }
-
-        animationDuration *= (line.length-1);
-    }
-
-    return svg;    
-}
-
-
-
-makeAreaGraph = function(width, height, lines){
-    svg = makeSvg(width,height);
-    colors = graphColors(lines.length);
-
-    xMargin = 0.1*width;
-    yMargin = 0.1*height;
-
-    var topCoord = getTopCoord(lines);
-
-    xFactor = (width-xMargin)/topCoord.x;
-    yFactor = (height-yMargin)/topCoord.y;
-
-    for(i = 0; i < lines.length; i++){
-        var line = lines[i];
-
-        var area = document.createElementNS(`http://www.w3.org/2000/svg`, `path`);
-
-        var pathStringTo = `M 0 ${height}`
-        var pathStringFrom = `M 0 ${height}`
-    
-        
-        
-        for(j = 0; j < line.length; j++){
-            var y = height - line[j].y*yFactor
-            pathStringTo += ` L ${line[j].x*xFactor} ${y}`
-            pathStringFrom += ` L ${line[j].x*xFactor} ${height}`
-        }
-
-        pathStringTo += ` L ${line[line.length-1].x*xFactor} ${height}`
-        pathStringFrom += ` L ${line[line.length-1].x*xFactor} ${height}`
-
-
-        area.setAttribute(`d`,pathStringFrom);
-        area.setAttribute(`fill`, colors[i]);
-        area.appendChild(makeAnimation("d", pathStringFrom, pathStringTo, animationDuration/2, (animationDuration/2)/lines.length*i));
-
-        svg.appendChild(area);
     }
     return svg;
 }
 
-
-
-
-backgroundLines = function(svg,topY,width,height,marginTop,marginRight,marginBottom,marginLeft){
-    yFactor = (height-marginTop-marginBottom)/topY;
-    yStepGoal = topY/5;
-    yStep10 = Math.pow(10,Math.round(Math.log10(yStepGoal)));
-    yStep = yStep10;
+export function backgroundLines(svg,topY,width,height,marginTop,marginRight,marginBottom,marginLeft){
+    let yFactor = (height-marginTop-marginBottom)/topY;
+    console.log("height",height-marginTop-marginBottom);
+    let yStepGoal = topY/5;
+    let yStep10 = Math.pow(10,Math.round(Math.log10(yStepGoal)));
+    let yStep = yStep10;
 
     if(Math.abs(yStepGoal - yStep10/5) < Math.abs(yStepGoal - yStep10)){yStep = yStep10/5;}
     if(Math.abs(yStepGoal - yStep10/2) < Math.abs(yStepGoal - yStep10)){yStep = yStep10/2;}
     if(Math.abs(yStepGoal - yStep10*2) < Math.abs(yStepGoal - yStep10)){yStep = yStep10*2;}
     if(Math.abs(yStepGoal - yStep10*5) < Math.abs(yStepGoal - yStep10)){yStep = yStep10*5;}
 
-    numberOfLines = topY/yStep;
-    numberOfSpaces = numberOfLines+1;
-    for(i = 0; i < numberOfSpaces; i++){
-        y = height-marginBottom - yStep*i*yFactor;
+    console.log("yStep",yStep);
+    let numberOfLines = topY/yStep;
+    let numberOfSpaces = numberOfLines+1;
+    for(let i = 0; i < numberOfSpaces; i++){
+        let y = height-marginBottom - yStep*i*yFactor;
         
         if(y<height*0.003){break;}
         
         let text = makeText(width*marginLeft*0.8,y,`#bbbbbb`);
-        textNumber = yStep*i;
+        let textNumber = yStep*i;
 
         if(textNumber < 1){
-            numberOfDecimals = Math.ceil(Math.abs(Math.log10(yStep)));
-            roundingFactor = Math.pow(10,numberOfDecimals);
+            let numberOfDecimals = Math.ceil(Math.abs(Math.log10(yStep)));
+            let roundingFactor = Math.pow(10,numberOfDecimals);
 
             textNumber = Math.round(textNumber*roundingFactor)/roundingFactor;
         }
@@ -487,26 +392,30 @@ backgroundLines = function(svg,topY,width,height,marginTop,marginRight,marginBot
     return svg;
 }
 
-getTopCoord = function(lines){
-    var topX = 0;
-    var topY = 0;
-    for(line of lines){
-        for(coord of line){
+export function topCoord(lines){
+    let topX = 0;
+    let topY = 0;
+    for(let line of lines){
+        for(let coord of line){
             if(coord.x > topX){topX = coord.x}
             if(coord.y > topY){topY = coord.y}
         }
     }
 
-    return new Coord(topX,topY);
+    return {x:topX,y:topY};
 }
 
 
 //  Classes
 
 
-function BarDataPoint(name, value) {
-    this.name = name;
-    this.value = value;
+/*class BarDataPoint {
+    name = "";
+    value = "";
+    BarDataPoint = (name,value) => {
+        this.name = name;
+        this.value = value;
+    }
 }
 
 function PieDataPoint(name, value){
@@ -517,15 +426,4 @@ function PieDataPoint(name, value){
     this.xEnd;
     this.yEnd;
     this.midAngle;
-}
-
-function Coord(x,y){
-    this.x = x;
-    this.y = y;
-}
-
-var Color = function(r,g,b) {
-    this.r = r;
-    this.g = g;
-    this.b = b;
-};
+}*/
