@@ -56,7 +56,7 @@ export class ArrowComponent extends React.Component{
                         <p style={textStyles}>{this.props.data.arrowDown.text}</p>
                     </Column>
                    <Column>
-                   <div style={{borderLeft: '2px dashed #1C83B0',height:'100%',marginRight:'20px',marginLeft:'20px'
+                   <div style={{borderLeft: '2px dashed #1C83B0',height:'90%',marginRight:'20px',marginLeft:'20px'
                    }}>
                     </div>
                    </Column>
