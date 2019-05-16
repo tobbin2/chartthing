@@ -20,13 +20,18 @@ export class LineComponent extends React.Component {
     super(props);
 
     let colors = []
-
+    
+    let amountOfNodes = 0
+    console.log(this.props.data.data[0].data)
+    
     for(let i= 0 ; i < this.props.data.data.length;i++){
       colors.push(randomBlue(5 * i))
+      if(this.props.data.data[i].data.length > amountOfNodes)
+        amountOfNodes = this.props.data.data[i].data.length
     }
 
     this._data = {
-      labels: this.props.data.labels !== undefined ? this.props.data.labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Okt","Nov","Dev"],
+      labels: this.props.data.labels !== undefined ? this.props.data.labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Okt","Nov","Dev"].slice(0,amountOfNodes+1),
       datasets: this.props.data.data.map( (object,index) => {
         return({
           label: object.label,
