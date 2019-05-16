@@ -54,7 +54,7 @@ export class PieComponentChart extends React.Component {
 
     renderDangerous = () => {
         //console.log(makePiechart(200,200,this._pieChartData,true,false).outerHTML);
-        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makePiechart(200,200,this._pieChartData,false,true).outerHTML}} />;
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makePiechart(200,200,this._pieChartData,true,true).outerHTML}} />;
     }
     
 

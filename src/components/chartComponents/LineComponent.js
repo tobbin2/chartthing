@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import { Column, Row } from "simple-flexbox";
 
 import { randomBlue } from './randomBlueFunction';
+import { makeLineChart } from "./chart";
 
 const textStyleClass = {
   color:'#1C83B0',
@@ -52,15 +53,16 @@ export class LineComponent extends React.Component {
     )
   }
 
+  renderDangerous = () => {
+    return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,[[{x:0,y:1},{x:1,y:4},{x:2,y:2},{x:3,y:3},{x:4,y:4},]],3).outerHTML}} />;
+  }
+
   render() {
       return(
         <Column>
             {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
             <Row>
-            <Line
-                data={this._data}
-                options={{ legend:false }}
-            />
+              {this.renderDangerous()}
             </Row>
         </Column>
       )
