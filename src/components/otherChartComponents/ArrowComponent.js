@@ -35,9 +35,6 @@ const textStyles = {
 
 export class ArrowComponent extends React.Component{
     
-    constructor(props){
-        super(props)
-    }
 
     createHeader = (text) => {
         return(
@@ -53,7 +50,7 @@ export class ArrowComponent extends React.Component{
                 {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row wrap={true} >
                     <Column justifyContent='center' alignItems='center'>
-                        <img src={arrowUp} style={arrowStyles}></img>
+                        <img src={arrowUp} style={arrowStyles} alt="arrow"></img>
                         <h1 style={percentageStyles}>{this.props.data.arrowUp.percentage}</h1>
                         <p style={textStyles}>{this.props.data.arrowDown.text}</p>
                     </Column>
@@ -63,7 +60,7 @@ export class ArrowComponent extends React.Component{
                     </div>
                    </Column>
                     <Column justifyContent='center' alignItems='center'>
-                        <img src={arrowDown} style={arrowStyles}></img>
+                        <img src={arrowDown} style={arrowStyles} alt="arrow"></img>
                         <h1 style={percentageStyles}>{this.props.data.arrowUp.percentage}</h1>
                         <p style={textStyles}>{this.props.data.arrowDown.text}</p>
                     </Column>

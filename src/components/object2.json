@@ -8,20 +8,88 @@
                     {
                         "data":[
                             {
-                                "data":["2.50","2.57","0.12","1.50"],
+                                "graphData":["2.50","2.57","0.12","1.50"],
                                 "label":"test1"
+                            },
+                            {
+                                "graphData":["2,1","2.5","2.0","0","0"],
+                                "label":"test2" 
                             }
                         ],
-                        "goalData":["1.5","2","2","2","2","2","0","1.5","2","2","2","1"], "header":"Nya ordrar"
+                        "goalGraphData":["1.5","2","2","2","2","2","0","1.5","2","2","2","1"], "header":"Nya ordrar"
                     }
                 },
                 {
-                    "primary":"bar",
-                    "primaryData":{"data":["5","6","7","13","4"] , "goalData":["10","10","10","10","10"]}
+                    "primary":"horizontalStackedStaple",
+                    "primaryData":{"header":"försäljning per månad", "graphData":[98,102,100,99], "labels":["test1","test2","test3","test4","test5","test6","test7","test8","test9"], "goalGraphData":[100,100,100,100,100,100,100,100,100,100,100,100]}
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"data":["7","5","4","2"], "goalData":["5","5","3","7"]}
+                    "primaryData":{"header":"Resultat / månad", "graphData":["97","102","99","100","133","13","123","123"], "goalGraphData":["100","100","100","100","100","100","100","100","100","100","100","100"]}
+                }
+            ]
+        },
+        {
+            "columns":[
+                {
+                    "primary":"bar",
+                    "primaryData":{"header":"Leveranssäkerhet","data":[{"graphData":["97.3","96.1","97.1","96.8"] ,"label":"test2"}] , "goalGraphData":["96","96","96","96","96","96","96","96","96","96","96","96"]}
+                },
+                {
+                    "primary":"line",
+                    "primaryData":{
+                        "data":[
+                            {
+                                "graphData":[3,8,7,3],
+                                "label":"test1"
+                            }
+                        ],
+                        "goalGraphData":[7,7,7,7,7,7,7,7,7,7,7,7],
+                        "header":"Reklamationer"
+                    }
+                },
+                {
+                    "primary":"line",
+                    "primaryData":{
+                        "data":[
+                            {
+                                "graphData":[0.46,0.00,0.41,0.40],
+                                "label":"test1"
+                            }
+                        ],
+                        "goalGraphData":[0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25],
+                        "header":"Destruktion"
+                    }
+                }
+            ]
+        },
+        {
+            "columns":[
+                {
+                    "primary":"line",
+                    "primaryData":{
+                        "data":[
+                            {
+                                "graphData":[15.32,13.89,14.38,14.15],
+                                "label":"test2"
+                            }
+                        ],
+                        "goalGraphData":[14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50],
+                        "header":"Elförbrukning"
+                    }
+                },
+                {
+                    "primary":"line",
+                    "primaryData":{
+                        "data":[
+                            {
+                                "graphData":[27896, 25141,26894,48000 ],
+                                "label":"test2"
+                            }
+                        ],
+                        "goalGraphData":[33333,33333,33333,33333,33333,33333,33333,33333,33333,33333,33333,33333],
+                        "header":"Extra Frakter i Sek"
+                    }
                 }
             ]
         }
