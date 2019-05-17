@@ -17,6 +17,7 @@ export class HorizontalStackerBarComponent extends React.Component{
     _data = {}
     months = ["Jan", "Feb", "Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
     amountOfNodes = 0
+    maximumNode = 0
 
     constructor(props){
         super(props)
@@ -34,6 +35,12 @@ export class HorizontalStackerBarComponent extends React.Component{
         */
         for(let i = 0 ; i < this.props.data.graphData.length; i++){
             
+            if(this.maximumNode < this.props.data.graphData[i])
+                this.maximumNode = Number(this.props.data.graphData[i])
+
+            if(this.maximumNode < this.props.data.goalGraphData[i])
+                this.maximumNode = Number(this.props.data.goalGraphData[i])
+
             if(this.props.data.goalGraphData[i] - this.props.data.graphData[i] === 0){
                 standardArray.push(this.props.data.graphData[i])
                 failureArray.push(0)
@@ -49,7 +56,10 @@ export class HorizontalStackerBarComponent extends React.Component{
                 failureArray.push((this.props.data.goalGraphData[i] - this.props.data.graphData[i]))
                 successArray.push(0)
             }
+            
         }
+
+        this.maximumNode += 20
 
         this._data = {
             labels: this.props.data.labels !== undefined ? this.props.data.labels.slice(0,this.amountOfNodes) : this.months.slice(0,this.props.data.graphData.length),
@@ -102,6 +112,8 @@ export class HorizontalStackerBarComponent extends React.Component{
     }
 
     render() {
+
+        let values = {}
         return(
             <Row>
                 <Column justifyContent='center'>
@@ -110,13 +122,15 @@ export class HorizontalStackerBarComponent extends React.Component{
                     <HorizontalBar
                         data={this._data}
                         options={{
-                            legend:false, 
+                            legend:false,
+                            responsive:true,
                             scales: {
                                 yAxes: [{
-                                    stacked: true
+                                    stacked:true
                                 }],
                                 xAxes:[{
-                                    stacked:true
+                                    stacked:true,
+                                    ticks:{max:this.maximumNode}
                                 }]
                             },
                             plugins:{
@@ -124,10 +138,13 @@ export class HorizontalStackerBarComponent extends React.Component{
                                     align:'right',
                                     anchor:'end',
                                     formatter: (value, ctx) => {
-                                        if(ctx.datasetIndex === 0)
-                                            return value
-                                        else
-                                            return null      
+                                        if(ctx.datasetIndex == 0){
+                                            values[ctx.dataIndex] = Number(value)
+                                        }else if(ctx.datasetIndex == 2){
+                                            return values[ctx.dataIndex] += Number(value)
+                                        }
+                                        return null
+
                                     }
                                 }
                             }
