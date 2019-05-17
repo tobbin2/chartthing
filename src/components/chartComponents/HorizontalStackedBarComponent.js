@@ -73,9 +73,7 @@ export class HorizontalStackerBarComponent extends React.Component{
     //creates summary of graph on last month (current)
     createSummary = () => {
     
-        let lastObject = this.props.data.graphData
-        console.log(lastObject, this.amountOfNodes)
-        let achieved = lastObject[this.amountOfNodes - 1]
+        let achieved = this.props.data.graphData[this.amountOfNodes - 1]
         let goal = this.props.data.goalGraphData[this.amountOfNodes - 1]
     
         let styles = {}
@@ -106,39 +104,39 @@ export class HorizontalStackerBarComponent extends React.Component{
     render() {
         return(
             <Row>
-            <Column justifyContent='center'>
-                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-                <Row>
-                <HorizontalBar
-                    data={this._data}
-                    options={{
-                        legend:false, 
-                        scales: {
-                            yAxes: [{
-                                stacked: true
-                            }],
-                            xAxes:[{
-                                stacked:true
-                            }]
-                        },
-                        plugins:{
-                            datalabels:{
-                                align:'right',
-                                anchor:'end',
-                                formatter: (value, ctx) => {
-                                    if(ctx.datasetIndex == 0)
-                                        return value
-                                    else
-                                        return null      
+                <Column justifyContent='center'>
+                    {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
+                    <Row>
+                    <HorizontalBar
+                        data={this._data}
+                        options={{
+                            legend:false, 
+                            scales: {
+                                yAxes: [{
+                                    stacked: true
+                                }],
+                                xAxes:[{
+                                    stacked:true
+                                }]
+                            },
+                            plugins:{
+                                datalabels:{
+                                    align:'right',
+                                    anchor:'end',
+                                    formatter: (value, ctx) => {
+                                        if(ctx.datasetIndex === 0)
+                                            return value
+                                        else
+                                            return null      
+                                    }
                                 }
                             }
-                        }
+                            
+                        }}
                         
-                    }}
-                    
-                />
-                </Row>
-            </Column>
+                    />
+                    </Row>
+                </Column>
             <Column>
                 {this.createSummary()}
             </Column>

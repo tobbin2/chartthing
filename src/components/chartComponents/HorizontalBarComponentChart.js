@@ -92,7 +92,7 @@ export class HorizontalBarComponentChart extends React.Component{
                                     align:'top',
                                     anchor:'top',
                                     formatter: (value, ctx) => {
-                                        if(ctx.datasetIndex == 0)
+                                        if(ctx.datasetIndex === 0)
                                             return value
                                         else
                                             return null      

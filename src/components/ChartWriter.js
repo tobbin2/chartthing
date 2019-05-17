@@ -14,9 +14,16 @@ import { ArrowComponent } from './otherChartComponents/ArrowComponent'
 import { PolarareaComponentChart } from "./otherChartComponents/PolarareaComponentChart"
 import { GradientLineComponentChart } from './otherChartComponents/GradientLineComponentChart'
 
-const data = require('./object2.json') 
+const data = require('./object2.json')
 
 export class ChartWriter extends React.Component {
+    values = {}
+    
+    constructor(){
+        super()
+        this.values = this.renderParts()
+
+    }
 
     //render all parts, object consist of 2 types of arrays row,col which this one maps through
     renderParts = () => {
@@ -27,11 +34,11 @@ export class ChartWriter extends React.Component {
                     <Row flex={"1"} key={"row"+indexOfRow} wrap={true}>
                         {
                             value.columns.map( (components,indexOfColumn) => {
-                                    return(
-                                        <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent={'center'} alignItems={'center'} style={{backgroundColor:'white',margin:3,borderRadius:10}}>
-                                            {this.renderPart(components,indexOfRow,indexOfColumn)}   
-                                        </Row>
-                                    )
+                                return(
+                                    <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent={'center'} alignItems={'center'} style={{backgroundColor:'white',margin:3,borderRadius:10}}>
+                                        {this.renderPart(components,indexOfRow,indexOfColumn)}   
+                                    </Row>
+                                )
                             })
                         }
                     </Row>
@@ -96,12 +103,10 @@ export class ChartWriter extends React.Component {
     }
 
     render(){
-        let values = this.renderParts()
         
         return(
             <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
-                {values}
-                
+                {this.values}
             </Column>
             
         )
