@@ -138,9 +138,9 @@ export class HorizontalStackerBarComponent extends React.Component{
                                     align:'right',
                                     anchor:'end',
                                     formatter: (value, ctx) => {
-                                        if(ctx.datasetIndex == 0){
+                                        if(ctx.datasetIndex === 0){
                                             values[ctx.dataIndex] = Number(value)
-                                        }else if(ctx.datasetIndex == 2){
+                                        }else if(ctx.datasetIndex === 2){
                                             return values[ctx.dataIndex] += Number(value)
                                         }
                                         return null
