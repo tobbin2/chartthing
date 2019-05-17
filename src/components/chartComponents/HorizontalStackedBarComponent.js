@@ -119,39 +119,39 @@ export class HorizontalStackerBarComponent extends React.Component{
                 <Column justifyContent='center'>
                     {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                     <Row>
-                    <HorizontalBar
-                        data={this._data}
-                        options={{
-                            legend:false,
-                            responsive:true,
-                            scales: {
-                                yAxes: [{
-                                    stacked:true
-                                }],
-                                xAxes:[{
-                                    stacked:true,
-                                    ticks:{max:this.maximumNode}
-                                }]
-                            },
-                            plugins:{
-                                datalabels:{
-                                    align:'right',
-                                    anchor:'end',
-                                    formatter: (value, ctx) => {
-                                        if(ctx.datasetIndex === 0){
-                                            values[ctx.dataIndex] = Number(value)
-                                        }else if(ctx.datasetIndex === 2){
-                                            return values[ctx.dataIndex] += Number(value)
-                                        }
-                                        return null
+                        <HorizontalBar
+                            data={this._data}
+                            options={{
+                                legend:false,
+                                responsive:true,
+                                scales: {
+                                    yAxes: [{
+                                        stacked:true
+                                    }],
+                                    xAxes:[{
+                                        stacked:true,
+                                        ticks:{max:this.maximumNode}
+                                    }]
+                                },
+                                plugins:{
+                                    datalabels:{
+                                        align:'right',
+                                        anchor:'end',
+                                        formatter: (value, ctx) => {
+                                            if(ctx.datasetIndex === 0){
+                                                values[ctx.dataIndex] = Number(value)
+                                            }else if(ctx.datasetIndex === 2){
+                                                return values[ctx.dataIndex] += Number(value)
+                                            }
+                                            return null
 
+                                        }
                                     }
                                 }
-                            }
+                                
+                            }}
                             
-                        }}
-                        
-                    />
+                        />
                     </Row>
                 </Column>
             <Column>
