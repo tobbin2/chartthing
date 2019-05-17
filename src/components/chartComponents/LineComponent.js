@@ -37,10 +37,10 @@ export class LineComponent extends React.Component {
           label: object.label,
           borderColor: colors[index],
           fill:false,
-          borderWidth: 1,
+          borderWidth: 3,
           data: object.data
         })
-      })
+      }).concat({label: "goal", borderColor: "gray", fill:false,borderWidth:3,data: this.props.data.goalData})
     };
   }
 

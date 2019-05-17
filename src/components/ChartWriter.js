@@ -7,11 +7,13 @@ import { SampleTextComponent } from './chartComponents/SampleTextComponent'
 import { DoughnutComponentChart } from './chartComponents/DoughnutComponentChart'
 import { RadarComponentChart } from './chartComponents/RadarComponentChart'
 import { ArrowComponent } from './chartComponents/ArrowComponent'
-import { PolarareaComponentChart } from "./chartComponents/PolarareaComponentChart";
-import { LineComponent } from './chartComponents/LineComponent';
+import { PolarareaComponentChart } from "./chartComponents/PolarareaComponentChart"
+import { LineComponent } from './chartComponents/LineComponent'
 import { GradientLineComponentChart } from './chartComponents/GradientLineComponentChart'
+import { BarComponentChart } from './chartComponents/BarComponentCharts' 
+import { StackedHorizontalBar } from './chartComponents/StackedHorizontalBar'
 
-const data = require('./object.json') 
+const data = require('./object2.json') 
 
 export class ChartWriter extends React.Component {
 
@@ -79,6 +81,10 @@ export class ChartWriter extends React.Component {
                 return <LineComponent data={data}/>
             case "gradientLine":
                 return <GradientLineComponentChart data={data} />
+            case "bar":
+                return <BarComponentChart data={data} />
+            case "horizontalStackedStaple":
+                return <StackedHorizontalBar data={data} />
             default:
                 return
         }

@@ -21,11 +21,13 @@ const arrowStyles = {
 const percentageStyles = {
     margin:0,
     fontWeight:700,
-    fontFamily:'Verdana'
+    fontFamily:'Verdana',
+    color:'#1C83B0'
+
 }
 
 const textStyles = {
-    color:'blue',
+    color:'#1C83B0',
     fontFamily:'Verdana',
     maxWidth:"15vh",
     textAlign:'center'

@@ -1,0 +1,29 @@
+{
+    "rows":[
+        {
+            "columns":[
+                {
+                    "primary":"line",
+                    "primaryData":
+                    {
+                        "data":[
+                            {
+                                "data":["2.50","2.57","0.12","1.50"],
+                                "label":"test1"
+                            }
+                        ],
+                        "goalData":["1.5","2","2","2","2","2","0","1.5","2","2","2","1"], "header":"Nya ordrar"
+                    }
+                },
+                {
+                    "primary":"bar",
+                    "primaryData":{"data":["5","6","7","13","4"] , "goalData":["10","10","10","10","10"]}
+                },
+                {
+                    "primary":"horizontalStackedStaple",
+                    "primaryData":{"data":["7","5","4","2"], "goalData":["5","5","3","7"]}
+                }
+            ]
+        }
+    ]
+}
