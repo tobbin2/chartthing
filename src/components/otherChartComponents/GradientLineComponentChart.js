@@ -2,7 +2,9 @@ import * as React from 'react'
 import { Line } from 'react-chartjs-2'
 import { Column, Row } from 'simple-flexbox'
 
-import { randomBlue } from './randomBlueFunction'
+import {makeLineChart} from '../svgComponents/chart.js'
+ 
+import { randomBlue } from '../randomBlueFunction'
 
 const textStyleClass = {
     color:'#1C83B0',
@@ -23,8 +25,8 @@ export class GradientLineComponentChart extends React.Component{
 
         for(let i= 0 ; i < this.props.data.data.length;i++){
             colors.push(randomBlue(5 * i))
-            if(this.props.data.data[i].data.length > amountOfNodes)
-                amountOfNodes = this.props.data.data[i].data.length
+            if(this.props.data.data[i].graphData.length > amountOfNodes)
+                amountOfNodes = this.props.data.data[i].graphData.length
         }
 
 
@@ -36,7 +38,7 @@ export class GradientLineComponentChart extends React.Component{
                     borderColor: colors[index],
                     backgroundColor: colors[index],
                     fill: true,
-                    data: object.data
+                    data: object.graphData
                 })
             })
         }
@@ -50,15 +52,16 @@ export class GradientLineComponentChart extends React.Component{
         )
     }
 
+    renderDangerous = () => {
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,this._pieChartData,false,true).outerHTML}} />;
+    }
+
     render() {
         return(
             <Column justifyContent='center'>
                 {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
-                <Line
-                    data={this._data}
-                    options={{ legend:false}}
-                />
+                    {this.renderDangerous()}
                 </Row>
             </Column>
         )

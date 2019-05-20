@@ -4,4 +4,3 @@ export function randomBlue(extra) {
     let l = 38 + extra;
     return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
 }
-

@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Radar } from 'react-chartjs-2'
-import { Row,Column } from 'simple-flexbox'
 
-import { randomBlue } from './randomBlueFunction'
+import { randomBlue } from '../randomBlueFunction'
 
 const textStyleClass = {
     color:'#1C83B0',
@@ -21,14 +20,14 @@ export class RadarComponentChart extends React.Component{
 
         let colors = []
 
-        for(let i= 0 ; i < this.props.data.data.length;i++){
+        for(let i= 0 ; i < this.props.data.graphData.length;i++){
             colors.push(randomBlue(5 * i))
         }
 
         this._data = {
             labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
-                data: this.props.data.data,
+                data: this.props.data.graphData,
                 backgroundColor: colors
             }]
         }
