@@ -24,14 +24,14 @@ export class PieComponentChart extends React.Component {
         let colors = []
         
 
-        for(let i= 0 ; i < this.props.data.data.length;i++){
+        for(let i= 0 ; i < this.props.data.graphData.length;i++){
             colors.push(randomBlue(5 * i))
         }
 
         this._data = {
-            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
-                data: this.props.data.data,
+                data: this.props.data.graphData,
                 backgroundColor: colors
             }]
         }
@@ -62,7 +62,8 @@ export class PieComponentChart extends React.Component {
         let a = React.createElement("html")
 
         return(
-            <Column alignItems="center" justifyContent='center'>
+           <Column>
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
                     {this.renderDangerous()}
                     

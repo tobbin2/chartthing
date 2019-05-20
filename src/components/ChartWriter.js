@@ -1,21 +1,31 @@
 import * as React from "react";
 import { Column, Row } from 'simple-flexbox';
 
-import { PieComponentChart } from './chartComponents/PieComponentChart'
+import { PieComponentChart } from './otherChartComponents/PieComponentChart'
 import { HorizontalBarComponentChart } from './chartComponents/HorizontalBarComponentChart'
 import { SampleTextComponent } from './chartComponents/SampleTextComponent'
-import { DoughnutComponentChart } from './chartComponents/DoughnutComponentChart'
-import { RadarComponentChart } from './chartComponents/RadarComponentChart'
+import { LineComponent } from './chartComponents/LineComponent'
+import { BarComponentChart } from './chartComponents/BarComponentCharts' 
+import { HorizontalStackerBarComponent } from './chartComponents/HorizontalStackedBarComponent'
 
-import { ArrowComponent } from './chartComponents/ArrowComponent'
-import { PolarareaComponentChart } from "./chartComponents/PolarareaComponentChart";
-import {LineComponent} from './chartComponents/LineComponent';
-import { GradientLineComponentChart } from './chartComponents/GradientLineComponentChart'
+import { DoughnutComponentChart } from './otherChartComponents/DoughnutComponentChart'
+import { RadarComponentChart } from './otherChartComponents/RadarComponentChart'
+import { ArrowComponent } from './otherChartComponents/ArrowComponent'
+import { PolarareaComponentChart } from "./otherChartComponents/PolarareaComponentChart"
+import { GradientLineComponentChart } from './otherChartComponents/GradientLineComponentChart'
 
-const data = require('./object.json') 
+const data = require('./object2.json')
 
 export class ChartWriter extends React.Component {
+    values = {}
+    
+    constructor(){
+        super()
+        this.values = this.renderParts()
 
+    }
+
+    //render all parts, object consist of 2 types of arrays row,col which this one maps through
     renderParts = () => {
         
         return( 
@@ -24,11 +34,11 @@ export class ChartWriter extends React.Component {
                     <Row flex={"1"} key={"row"+indexOfRow} wrap={true}>
                         {
                             value.columns.map( (components,indexOfColumn) => {
-                                    return(
-                                        <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent='center' alignItems='center' horizontal='around' style={{backgroundColor:'white',margin:3,borderRadius:10}}>
-                                            {this.renderPart(components,indexOfRow,indexOfColumn)}   
-                                        </Row>
-                                    )
+                                return(
+                                    <Row flexGrow={1} wrap={true} key={"RowOfRow"+indexOfRow+"_"+indexOfColumn} justifyContent={'center'} alignItems={'center'} style={{backgroundColor:'white',margin:3,borderRadius:10}}>
+                                        {this.renderPart(components,indexOfRow,indexOfColumn)}   
+                                    </Row>
+                                )
                             })
                         }
                     </Row>
@@ -37,29 +47,32 @@ export class ChartWriter extends React.Component {
         )
     }
 
+    //render specific part of what was sent in the parameters
     renderPart = (components,indexOfRow,indexOfColumn) => {
 
         let finishedComponent = []
         
+        //primary element and secondary element can one object consist of so the developer can design their part with 0 - 2 elements
         if(components.primary){
             finishedComponent.push(
-                <Column key={"columnOfRowPrimary"+indexOfRow+"_"+indexOfColumn}>
+                <div key={"columnOfRowPrimary"+indexOfRow+"_"+indexOfColumn}>
                     {this.pickChartOrComponent(components.primary,components.primaryData)}
-                </Column>
+                </div>
             )
         }
         
         if(components.secondary){
             finishedComponent.push(
-                <Column key={"columnOfRowSecondary"+indexOfRow+"_"+indexOfColumn}>
+                <div key={"columnOfRowSecondary"+indexOfRow+"_"+indexOfColumn}>
                     {this.pickChartOrComponent(components.secondary,components.secondaryData)}
-                </Column>
+                </div>
             )
         }
         
         return(finishedComponent)
     }
 
+    //switch case returns component depending of parameter type
     pickChartOrComponent = (type,data) => {
         switch(type){
             case "horizontalStaple":
@@ -75,23 +88,25 @@ export class ChartWriter extends React.Component {
             case "sampleText":
                 return <SampleTextComponent data={data}/>
             case "arrow":
-                return <ArrowComponent />
+                return <ArrowComponent data={data} />
             case "line":
-                return <LineComponent />
+                return <LineComponent data={data}/>
             case "gradientLine":
                 return <GradientLineComponentChart data={data} />
+            case "bar":
+                return <BarComponentChart data={data} />
+            case "horizontalStackedStaple":
+                return <HorizontalStackerBarComponent data={data} />
             default:
                 return
         }
     }
 
     render(){
-        let values = this.renderParts()
         
         return(
             <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
-                {values}
-                
+                {this.values}
             </Column>
             
         )

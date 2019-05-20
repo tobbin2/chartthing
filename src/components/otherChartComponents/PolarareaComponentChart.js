@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Polar } from 'react-chartjs-2'
 
-import { randomBlue } from './randomBlueFunction'
+import { randomBlue } from '../randomBlueFunction'
 
 const textStyleClass = {
     color:'#1C83B0',
@@ -20,14 +20,14 @@ export class PolarareaComponentChart extends React.Component{
 
         let colors = []
 
-        for(let i= 0 ; i < this.props.data.data.length;i++){
+        for(let i= 0 ; i < this.props.data.graphData.length;i++){
             colors.push(randomBlue(5 * i))
         }
 
         this._data = {
-            labels: this.props.data.labels != undefined ? this.props.data.labels : [],
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : [],
             datasets:[{
-                data: this.props.data.data,
+                data: this.props.data.graphData,
                 backgroundColor: colors
             }]
         }
@@ -43,7 +43,7 @@ export class PolarareaComponentChart extends React.Component{
     render(){
         return(
             <div>
-                {this.props.data.header != undefined ? this.createHeader(this.props.data.header) : null}
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Polar
                     data={this._data}
                     //options={{legend:false}}
