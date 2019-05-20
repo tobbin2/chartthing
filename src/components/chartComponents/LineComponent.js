@@ -2,7 +2,7 @@ import * as React from "react";
 import { Line } from "react-chartjs-2";
 import { Column, Row } from "simple-flexbox";
 
-import { randomBlue } from '../randomBlueFunction';
+import { makeLineChart } from '../svgComponents/chart.js'
 
 const textStyleClass = {
   color:'#1C83B0',
@@ -14,21 +14,12 @@ const textStyleClass = {
 
 export class LineComponent extends React.Component {
 
-  _data = {};
+  /*_data = {};
   amountOfNodes = 0
-  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Okt","Nov","Dev"]
+  months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
 
   constructor(props) {
     super(props);
-
-    let colors = []
-        
-    //loops through amount of values, appends color for each and changes amountOfNodes to represent length of xAxis. 
-    for(let i= 0 ; i < this.props.data.data.length;i++){
-      colors.push(randomBlue(5 * i))
-      if(this.props.data.data[i].graphData.length > this.amountOfNodes)
-        this.amountOfNodes = this.props.data.data[i].graphData.length
-    }
 
     //appends data to public variabe _data, which is the data of the graph. (loops through object sent in)
     this._data = {
@@ -36,7 +27,6 @@ export class LineComponent extends React.Component {
       datasets: this.props.data.data.map( (object,index) => {
         return({
           label: object.label,
-          borderColor: colors[index],
           fill:false,
           borderWidth: 3,
           data: object.graphData
@@ -82,24 +72,26 @@ export class LineComponent extends React.Component {
       </div>
     )
   
-  }
+  }*/
 
+  renderDangerous = () => {
+    return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,[[{x:0,y:1},{x:1,y:4},{x:2,y:2},{x:3,y:3},{x:4,y:4},]],3).outerHTML }} />;
+  }
+//{this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
+//{this.createSummary()}
   render() {
-      return(
-        <Row>
-          <Column>
-              {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-              <Row>
-              <Line
-                  data={this._data}
-                  options={{ legend:false, plugins:{datalabels:{display:false}}}}
-              />
-              </Row>
-          </Column>
-          <Column justifyContent="center">
-            {this.createSummary()}
-          </Column>
-        </Row>
-      )
+    return(
+      <Row>
+        <Column>
+            
+            <Row>
+              {this.renderDangerous()}
+            </Row>
+        </Column>
+        <Column justifyContent="center">
+          
+        </Column>
+      </Row>
+    )
   }   
 } 

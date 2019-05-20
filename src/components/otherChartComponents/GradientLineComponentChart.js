@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Line } from 'react-chartjs-2'
 import { Column, Row } from 'simple-flexbox'
 
+import {makeLineChart} from '../svgComponents/chart.js'
+ 
 import { randomBlue } from '../randomBlueFunction'
 
 const textStyleClass = {
@@ -50,15 +52,16 @@ export class GradientLineComponentChart extends React.Component{
         )
     }
 
+    renderDangerous = () => {
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,this._pieChartData,false,true).outerHTML}} />;
+    }
+
     render() {
         return(
             <Column justifyContent='center'>
                 {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
-                <Line
-                    data={this._data}
-                    options={{ legend:false}}
-                />
+                    {this.renderDangerous()}
                 </Row>
             </Column>
         )
