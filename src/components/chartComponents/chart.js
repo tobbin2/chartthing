@@ -338,7 +338,9 @@ export function makeLineChart(width, height, lines, goal){
     var svg = makeSvg(width,height);
     var colors = graphColors(lines.length);
 
-    var xMargin = 0.3*width;
+    var marginLeft = 0.05*width
+    var marginRight = width/6.5 + 0.017*width*(Math.log(goal)+1)
+    var xMargin = marginLeft + marginRight;
     var yMargin = 0.1*height;
     var circleSize = height/40;
 
@@ -346,10 +348,10 @@ export function makeLineChart(width, height, lines, goal){
     var xFactor = (width-xMargin)/topCoord.x;
     var yFactor = (height-yMargin)/topCoord.y;
 
-    svg.appendChild(makeLine(0,height - yMargin/2 - goal*yFactor, width - xMargin/2, height - yMargin/2 - goal*yFactor, 1, `#bbb` ));
-    var goalText = makeText(width - xMargin/2.5, height - yMargin/2 - goal*yFactor, `#bbb`);
+    svg.appendChild(makeLine(0,height - yMargin/2 - goal*yFactor, width - marginRight, height - yMargin/2 - goal*yFactor, 1, `#bbb` ));
+    var goalText = makeText(width - marginRight, height - yMargin/2 - goal*yFactor, `#bbb`);
     var goalTextSize = height/15;
-    goalText.innerHTML = `Mål`;
+    goalText.innerHTML = `Mål: ${goal}`;
     goalText.setAttribute(`dominant-baseline`,`central`);
     goalText.setAttribute(`style`,`font: normal ${goalTextSize}px arial`);
     svg.appendChild(goalText);
@@ -359,7 +361,7 @@ export function makeLineChart(width, height, lines, goal){
 
         animationDuration /= (line.length-1);
 
-        let circle = makeCircle(xMargin/2 + line[0].x*xFactor, height - yMargin/2 - line[0].y*yFactor, 0, colors[i]);
+        let circle = makeCircle(marginLeft + line[0].x*xFactor, height - yMargin/2 - line[0].y*yFactor, 0, colors[i]);
         circle.appendChild(makeAnimation(`r`, 0, circleSize, animationDuration/5,0));
         svg.appendChild(circle);
         
@@ -367,9 +369,9 @@ export function makeLineChart(width, height, lines, goal){
             var coordPrev = line[j-1];
             var coordCurr = line[j];
 
-            var x1 = xMargin/2 + coordPrev.x*xFactor;
+            var x1 = marginLeft + coordPrev.x*xFactor;
             var y1 = height - yMargin/2 - coordPrev.y*yFactor;
-            var x2 = xMargin/2 + coordCurr.x*xFactor;
+            var x2 = marginLeft + coordCurr.x*xFactor;
             var y2 = height - yMargin/2 - coordCurr.y*yFactor;
 
             let circle = makeCircle(x2, y2, 0, colors[i])
