@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { Row,Column } from 'simple-flexbox'
-import { randomBlue } from '../randomBlueFunction'
+import { makeBarChart } from '../svgComponents/chart.js'
 
 const textStyleClass = {
     color:'#1C83B0',
-    fontFamily:'Lucida Console',
+    fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
     marginBottom:'0'
@@ -14,20 +14,12 @@ const textStyleClass = {
 export class BarComponentChart extends React.Component{
 
     _data = {}
+    _values = []
     months = ["Jan", "Feb", "Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
     amountOfNodes = 0
 
     constructor(props){
         super(props)
-
-        let colors = []
-        
-        //loops through amount of values, appends color for each and changes amountOfNodes to represent length of xAxis. 
-        for(let i= 0 ; i < this.props.data.data.length;i++){
-            colors.push(randomBlue(5 * i)) 
-            if(this.props.data.data[i].graphData.length > this.amountOfNodes)
-                this.amountOfNodes = this.props.data.data[i].graphData.length
-        }
 
         //appends data to public variabe _data, which is the data of the graph. (loops through object sent in)
         this._data = {
@@ -36,7 +28,6 @@ export class BarComponentChart extends React.Component{
             this.props.data.data.map( (object,index) => {
                 return({
                     label: object.label,
-                    backgroundColor: colors[index],
                     data: object.graphData
                 })
             }).concat({
@@ -45,6 +36,14 @@ export class BarComponentChart extends React.Component{
                 data: this.props.data.goalGraphData
             })
         }
+
+        console.log(this._data)
+
+        for(let i = 0 ; i < this._data.datasets[0].data.length; i++){
+            this._values.push({
+                goal:this._data.datasets[1].data[i], value:this._data.datasets[0].data[i]
+            }) 
+          }
 
     }
 
@@ -113,31 +112,19 @@ export class BarComponentChart extends React.Component{
     
     }
 
+
+    renderDangerous = () => {
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeBarChart(200,200,this._values,true,true).outerHTML }} />;
+    }
+
     render(){
         return(
-            <Row>         
+            <Row> 
+                        
                 <Column>
-                    {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-                    <Bar
-                        data={this._data}
-                        options={{ legend:false, barValueSpacing: 20,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        min: 0
-                                    }
-                                }]
-                            },
-                            plugins:{
-                                datalabels:{
-                                    color:'white',
-                                    formatter: (value, ctx) => {
-                                        return value   
-                                    }
-                                }
-                            }
-                        }}
-                    />
+                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
+                    {this.renderDangerous()}
+                    
                 </Column>
                 <Column>
                     {this.createSummary()}

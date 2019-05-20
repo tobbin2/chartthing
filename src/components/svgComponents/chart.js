@@ -184,7 +184,19 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
     
     var svg = makeSvg(totalWidth, height);
     var barAmount = barDataPoints.length;
-    var colors = graphColors(barDataPoints.length);
+    
+    function colorPicker(a,b){
+        var color = "";
+        
+        if(a<b){
+            color = "green";
+        } else {
+            color = "red";
+        };
+
+        return color;
+    };
+    
     var textSize = (totalWidth+height)/40;
     var textSpace = -(height/40);
     var marginTop = showText ? 0.8 : 0.95;
@@ -236,6 +248,22 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
     }
 
     for(var i = 0; i < barAmount; i++) {
+        let barHeight = f * barDataPoints[i].goal;
+
+        let barXPos = ((i + 1) * spaceWidth + (i * barWidth) + marginLeft*totalWidth) + (width/30);
+    
+        let barYPos = height - barHeight;
+
+        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, "#bbb");
+                
+        rect.appendChild(makeAnimation(`height`,0, barHeight, animationDuration,0));
+        rect.appendChild(makeAnimation(`y`,height, height - barHeight, animationDuration,0));
+        
+        svg.appendChild(rect);        
+    }
+
+
+    for(var i = 0; i < barAmount; i++) {
         let barHeight = f * barDataPoints[i].value;
 
         let barXPos = (i + 1) * spaceWidth + (i * barWidth) + marginLeft*totalWidth;
@@ -250,7 +278,7 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
             svg.appendChild(valueText);
         }
 
-        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, colors[i]);
+        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, colorPicker(barDataPoints[i].goal,barDataPoints[i].value));
                 
         rect.appendChild(makeAnimation(`height`,0, barHeight, animationDuration,0));
         rect.appendChild(makeAnimation(`y`,height, height - barHeight, animationDuration,0));
@@ -258,6 +286,7 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
         svg.appendChild(rect);        
     }
 
+    
     return svg;
 }
 

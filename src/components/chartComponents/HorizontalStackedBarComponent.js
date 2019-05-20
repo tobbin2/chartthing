@@ -3,6 +3,8 @@ import { HorizontalBar } from 'react-chartjs-2'
 import 'chartjs-plugin-datalabels'
 import { Column, Row } from 'simple-flexbox'
 
+import { makeHorizontalBarChart } from '../svgComponents/chart.js'
+
 const textStyleClass = {
     color:'#1C83B0',
     fontFamily:'Lucida Console',
@@ -111,6 +113,10 @@ export class HorizontalStackerBarComponent extends React.Component{
         )
     }
 
+    renderDangerous = () => {
+        //return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeHorizontalBarChart(200,200,).outerHTML }} />;
+    }
+
     render() {
 
         let values = {}
@@ -119,39 +125,7 @@ export class HorizontalStackerBarComponent extends React.Component{
                 <Column justifyContent='center'>
                     {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                     <Row>
-                        <HorizontalBar
-                            data={this._data}
-                            options={{
-                                legend:false,
-                                responsive:true,
-                                scales: {
-                                    yAxes: [{
-                                        stacked:true
-                                    }],
-                                    xAxes:[{
-                                        stacked:true,
-                                        ticks:{max:this.maximumNode}
-                                    }]
-                                },
-                                plugins:{
-                                    datalabels:{
-                                        align:'right',
-                                        anchor:'end',
-                                        formatter: (value, ctx) => {
-                                            if(ctx.datasetIndex === 0){
-                                                values[ctx.dataIndex] = Number(value)
-                                            }else if(ctx.datasetIndex === 2){
-                                                return values[ctx.dataIndex] += Number(value)
-                                            }
-                                            return null
-
-                                        }
-                                    }
-                                }
-                                
-                            }}
-                            
-                        />
+                        {this.renderDangerous()}
                     </Row>
                 </Column>
             <Column>

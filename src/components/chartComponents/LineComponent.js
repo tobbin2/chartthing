@@ -6,7 +6,7 @@ import { makeLineChart } from '../svgComponents/chart.js'
 
 const textStyleClass = {
   color:'#1C83B0',
-  fontFamily:'Lucida Console',
+  fontFamily:'Arial',
   fontWeight:1500,
   width:'100%',
   marginBottom:'0'
@@ -14,9 +14,10 @@ const textStyleClass = {
 
 export class LineComponent extends React.Component {
 
-  /*_data = {};
-  amountOfNodes = 0
-  months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
+  _data = {};
+  _coords = [];
+  amountOfNodes = 0;
+  months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
 
   constructor(props) {
     super(props);
@@ -28,11 +29,21 @@ export class LineComponent extends React.Component {
         return({
           label: object.label,
           fill:false,
-          borderWidth: 3,
+          borderWidth: 3, 
           data: object.graphData
         })
       }).concat({label: "goal", borderColor: "gray", fill:false,borderWidth:3,data: this.props.data.goalGraphData})
     };
+
+    console.log(`data`,this._data);
+
+    for(let i = 0 ; i < this._data.datasets[0].data.length; i++){
+      this._coords.push({
+         x:i,
+         y:this._data.datasets[0].data[i]
+      }) 
+    }
+    console.log(`coords`,this._coords)
   }
 
   createHeader = (text) => {
@@ -71,25 +82,27 @@ export class LineComponent extends React.Component {
         <p>{(achieved/goal).toFixed(4) * 100 + "%"}</p>
       </div>
     )
+  }
+
+
+
   
-  }*/
 
   renderDangerous = () => {
-    return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,[[{x:0,y:1},{x:1,y:4},{x:2,y:2},{x:3,y:3},{x:4,y:4},]],3).outerHTML }} />;
+    return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeLineChart(200,200,[this._coords],this._data.datasets[1].data).outerHTML }} />;
   }
-//{this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-//{this.createSummary()}
+
   render() {
     return(
       <Row>
         <Column>
-            
+          {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
             <Row>
               {this.renderDangerous()}
             </Row>
         </Column>
         <Column justifyContent="center">
-          
+          {this.createSummary()}  
         </Column>
       </Row>
     )
