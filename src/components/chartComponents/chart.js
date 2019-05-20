@@ -111,7 +111,7 @@ export function graphColors(amount){
     return colors;
 }
 
-export function makePieChart(width, height, pieDataPoints, doSort, showText){
+export function makePiechart(width, height, pieDataPoints, doSort, showText){
     if(doSort){
         pieDataPoints.sort(function(a,b){return a.value-b.value}).reverse();
     }
@@ -184,19 +184,7 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
     
     var svg = makeSvg(totalWidth, height);
     var barAmount = barDataPoints.length;
-    
-    function colorPicker(a,b){
-        var color = "";
-        
-        if(a<b){
-            color = "#1272A4";
-        } else {
-            color = "#B0252E";
-        };
-
-        return color;
-    };
-    
+    var colors = graphColors(barDataPoints.length);
     var textSize = (totalWidth+height)/40;
     var textSpace = -(height/40);
     var marginTop = showText ? 0.8 : 0.95;
@@ -248,22 +236,6 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
     }
 
     for(var i = 0; i < barAmount; i++) {
-        let barHeight = f * barDataPoints[i].goal;
-
-        let barXPos = ((i + 1) * spaceWidth + (i * barWidth) + marginLeft*totalWidth) + (width/30);
-    
-        let barYPos = height - barHeight;
-
-        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, "#bbb");
-                
-        rect.appendChild(makeAnimation(`height`,0, barHeight, animationDuration,0));
-        rect.appendChild(makeAnimation(`y`,height, height - barHeight, animationDuration,0));
-        
-        svg.appendChild(rect);        
-    }
-
-
-    for(var i = 0; i < barAmount; i++) {
         let barHeight = f * barDataPoints[i].value;
 
         let barXPos = (i + 1) * spaceWidth + (i * barWidth) + marginLeft*totalWidth;
@@ -278,7 +250,7 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
             svg.appendChild(valueText);
         }
 
-        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, colorPicker(barDataPoints[i].goal,barDataPoints[i].value));
+        var rect = makeRectangle(barXPos, barYPos, barWidth, barHeight, colors[i]);
                 
         rect.appendChild(makeAnimation(`height`,0, barHeight, animationDuration,0));
         rect.appendChild(makeAnimation(`y`,height, height - barHeight, animationDuration,0));
@@ -286,7 +258,6 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
         svg.appendChild(rect);        
     }
 
-    
     return svg;
 }
 
@@ -362,13 +333,12 @@ export function makeHorizontalBarChart(width, height, barHorizontalData, doSort,
 
     return svg;
 }
-
-export function makeHorizontalBarChartRedGreen(width, height, barData, doSort, showText) {
+export function makeHorizontalBarChartRedGreen(width, height, values, doSort, showText) {
     var svg = makeSvg(width, height);
     var textSize = (height+width)/40;
 
     if(doSort){
-        barData.sort(function(a,b){
+        values.sort(function(a,b){
             return a.value - b.value;
         }).reverse();
     }
@@ -376,47 +346,44 @@ export function makeHorizontalBarChartRedGreen(width, height, barData, doSort, s
     var barsPercent = 0.5;
     var spacePercent = 1-barsPercent;
 
-    var barHeight = (barsPercent*height)/barData.length;
-    var spaceHeight = (spacePercent*height)/(barData.length+1);
+    var barHeight = (barsPercent*height)/values.length;
+    var spaceHeight = (spacePercent*height)/(values.length+1);
     
     var biggestValue = 0;
 
-    for (var value of barData) {
+    for (var value of values) {
         if(value.value > biggestValue){biggestValue = value.value}
     }
 
     var f = width / biggestValue;
 
     var currentYPos = spaceHeight;
-    for (var i = 0; i < barData.length; i++) {
+    for (var i = 0; i < values.length; i++) {
         var blueWidth = 0;
         var greenWidth = 0;
         var redWidth = 0;
-        if(barData[i].value > barData[i].goal){
-            blueWidth = barData[i].goal*f;
-            greenWidth = (barData[i].value - barData[i].goal)*f;
+        if(values[i].value > values[i].goal){
+            blueWidth = values[i].goal*f;
+            greenWidth = (values[i].value - values[i].goal)*f;
         }
         else{
-            blueWidth = barData[i].value*f;
-            redWidth = (barData[i].goal - barData[i].value)*f;
+            blueWidth = values[i].value*f;
+            redWidth = (values[i].goal - values[i].value)*f;
         }
-
-        console.log("widths", {blueWidth,greenWidth,redWidth});
-
-        var colors = graphColors(4);
+        var colors = graphColors(numberOfSections);
 
         svg.appendChild(makeRectangle(0,currentYPos,blueWidth, barHeight, colors[0]));
         svg.appendChild(makeRectangle(blueWidth,currentYPos,redWidth, barHeight, "#ff0000"));
         svg.appendChild(makeRectangle(blueWidth,currentYPos,greenWidth, barHeight, "#00ff00"));
         
-        if (showText){
-            let valueText = makeText((barData[i].value*f)/2, currentYPos+barHeight/2, `white`);
-            valueText.innerHTML = barData[i].value; 
+        /*if (showText){
+            let valueText = makeText(currentXPos+values[i].barWidth[j]*f/2, currentYPos+barHeight/2, `white`);
+            valueText.innerHTML = values[i].barWidth[j]; 
             valueText.setAttribute(`text-anchor`, `middle`); 
             valueText.setAttribute(`style`, `font: normal ${textSize}px arial`);  
             valueText.setAttribute(`dominant-baseline`, `central`);  
             svg.appendChild(valueText);
-        }
+        }*/
         
         currentYPos += (spaceHeight + barHeight);
     }
@@ -434,7 +401,7 @@ export function makeLineChart(width, height, lines, goal){
     var colors = graphColors(lines.length);
 
     var marginLeft = 0.05*width
-    var marginRight = width/6 + 0.037*width*goal.toString().length;
+    var marginRight = width/6.5 + 0.017*width*(Math.log(goal)+1)
     var xMargin = marginLeft + marginRight;
     var yMargin = 0.1*height;
     var circleSize = height/40;
@@ -444,11 +411,10 @@ export function makeLineChart(width, height, lines, goal){
     var yFactor = (height-yMargin)/topCoord.y;
 
     svg.appendChild(makeLine(0,height - yMargin/2 - goal*yFactor, width - marginRight, height - yMargin/2 - goal*yFactor, 1, `#bbb` ));
-    var goalText = makeText(width, height - yMargin/2 - goal*yFactor, `#bbb`);
+    var goalText = makeText(width - marginRight, height - yMargin/2 - goal*yFactor, `#bbb`);
     var goalTextSize = height/15;
     goalText.innerHTML = `Mål: ${goal}`;
     goalText.setAttribute(`dominant-baseline`,`central`);
-    goalText.setAttribute(`text-anchor`,`end`);
     goalText.setAttribute(`style`,`font: normal ${goalTextSize}px arial`);
     svg.appendChild(goalText);
 

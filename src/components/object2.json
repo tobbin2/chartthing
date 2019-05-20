@@ -16,11 +16,11 @@
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"header":"Försäljning per månad", "graphData":[98,102,100,99], "labels":["test1","test2","test3","test4","test5","test6","test7","test8","test9"], "goalGraphData":[100,100,100,100,100,100,100,100,100,100,100,100]}
+                    "primaryData":{"header":"Försäljning per månad", "values":[98,102,100,99], "labels":["test1","test2","test3","test4"], "goals":[100,100,100,100]}
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"header":"Resultat / månad", "graphData":["97","102","99","100","200","13","123","123"], "goalGraphData":["100","100","100","100","100","100","100","100","100","100","100","100"]}
+                    "primaryData":{"header":"Resultat / månad", "values":[97,102,99,100], "goals":[100,100,100,100]}
                 }
             ]
         },

@@ -35,7 +35,7 @@ export class LineComponent extends React.Component {
       }).concat({label: "goal", borderColor: "gray", fill:false,borderWidth:3,data: this.props.data.goalGraphData})
     };
 
-    console.log(`data`,this._data);
+    //console.log(`data`,this._data);
 
     for(let i = 0 ; i < this._data.datasets[0].data.length; i++){
       this._coords.push({
@@ -43,7 +43,7 @@ export class LineComponent extends React.Component {
          y:this._data.datasets[0].data[i]
       }) 
     }
-    console.log(`coords`,this._coords)
+    //console.log(`coords`,this._coords)
   }
 
   createHeader = (text) => {

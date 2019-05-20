@@ -37,7 +37,7 @@ export class BarComponentChart extends React.Component{
             })
         }
 
-        console.log(this._data)
+        //console.log(this._data)
 
         for(let i = 0 ; i < this._data.datasets[0].data.length; i++){
             this._values.push({
@@ -60,7 +60,7 @@ export class BarComponentChart extends React.Component{
     createSummary = () => {
     
         let lastObject = this.props.data.graphData
-        console.log(lastObject, this.amountOfNodes)
+        //console.log(lastObject, this.amountOfNodes)
         let achieved = lastObject[this.amountOfNodes - 1]
         let goal = this.props.data.goalGraphData[this.amountOfNodes - 1]
     
