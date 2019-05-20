@@ -333,6 +333,68 @@ export function makeHorizontalBarChart(width, height, barHorizontalData, doSort,
 
     return svg;
 }
+export function makeHorizontalBarChartRedGreen(width, height, values, doSort, showText) {
+    var svg = makeSvg(width, height);
+    var textSize = (height+width)/40;
+
+    if(doSort){
+        values.sort(function(a,b){
+            return a.value - b.value;
+        }).reverse();
+    }
+
+    var barsPercent = 0.5;
+    var spacePercent = 1-barsPercent;
+
+    var barHeight = (barsPercent*height)/values.length;
+    var spaceHeight = (spacePercent*height)/(values.length+1);
+    
+    var biggestValue = 0;
+
+    for (var value of values) {
+        if(value.value > biggestValue){biggestValue = value.value}
+    }
+
+    var f = width / biggestValue;
+
+    var currentYPos = spaceHeight;
+    for (var i = 0; i < values.length; i++) {
+        var blueWidth = 0;
+        var greenWidth = 0;
+        var redWidth = 0;
+        if(values[i].value > values[i].goal){
+            blueWidth = values[i].goal;
+            greenWidth = (values[i].value - values[i].goal)*f;
+        }
+        else{
+            blueWidth = values[i].value*f;
+            redWidth = (values[i].goal - values[i].value)*f;
+        }
+        var colors = graphColors(numberOfSections);
+
+        svg.appendChild(makeRectangle(0,currentYPos,blueWidth, barHeight, colors[0]));
+        svg.appendChild(makeRectangle(blueWidth,currentYPos,redWidth, barHeight, "#ff0000"));
+        svg.appendChild(makeRectangle(blueWidth,currentYPos,greenWidth, barHeight, "#00ff00"));
+        
+        /*if (showText){
+            let valueText = makeText(currentXPos+values[i].barWidth[j]*f/2, currentYPos+barHeight/2, `white`);
+            valueText.innerHTML = values[i].barWidth[j]; 
+            valueText.setAttribute(`text-anchor`, `middle`); 
+            valueText.setAttribute(`style`, `font: normal ${textSize}px arial`);  
+            valueText.setAttribute(`dominant-baseline`, `central`);  
+            svg.appendChild(valueText);
+        }*/
+        
+        currentYPos += (spaceHeight + barHeight);
+    }
+
+    var animationRectangle = makeRectangle(0,0,width,height,`white`);
+    animationRectangle.appendChild(makeAnimation(`width`,width,0,animationDuration,0));
+    animationRectangle.appendChild(makeAnimation(`x`,0,width,animationDuration,0));
+    svg.appendChild(animationRectangle);
+
+    return svg;
+}
 
 export function makeLineChart(width, height, lines, goal){
     var svg = makeSvg(width,height);
