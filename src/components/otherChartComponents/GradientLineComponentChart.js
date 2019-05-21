@@ -6,10 +6,11 @@ import { randomBlue } from '../randomBlueFunction'
 
 const textStyleClass = {
     color:'#1C83B0',
-    fontFamily:'Verdana',
+    fontFamily:'Lucida Console',
     fontWeight:500,
     width:'100%',
-    marginBottom:'0'
+    marginBottom:'20px',
+    marginTop: '12px'
 }
 
 export class GradientLineComponentChart extends React.Component{
