@@ -7,8 +7,8 @@ import { makeHorizontalBarChart } from '../svgComponents/chart.js'
 import { makeHorizontalBarChartRedGreen } from '../svgComponents/chart.js';
 
 const textStyleClass = {
-    color:'#1C83B0',
-    fontFamily:'Lucida Console',
+    color:'#1272A4',
+    fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
     marginBottom:'0',
@@ -48,9 +48,9 @@ export class HorizontalStackerBarComponent extends React.Component{
     
         //reached goal true, else false
         if(achieved >= goal)
-            styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+            styles = {color:'#706D01',textAlign:'center',margin:30,fontFamily:'Arial Black'}
         else 
-            styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
+            styles= {color:'#B0252E',textAlign:'center',margin:30, fontFamily:'Arial Black'}
     
         return(
           <div style={styles}>

@@ -4,7 +4,7 @@ import { Row,Column } from 'simple-flexbox'
 import { makeBarChart } from '../svgComponents/chart.js'
 
 const textStyleClass = {
-    color:'#1C83B0',
+    color:'#1272A4',
     fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
@@ -15,15 +15,17 @@ export class BarComponentChart extends React.Component{
 
     _data = {}
     _values = []
-    months = ["Jan", "Feb", "Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]
-    amountOfNodes = 0
+    months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    numberOfValues = 0
 
     constructor(props){
         super(props)
 
+        this.numberOfValues = this.props.data.data[0].graphData.length;
+
         //appends data to public variabe _data, which is the data of the graph. (loops through object sent in)
         this._data = {
-            labels: this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0,this.amountOfNodes),
+            labels: this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0,this.numberOfValues),
             datasets: 
             this.props.data.data.map( (object,index) => {
                 return({
@@ -57,29 +59,33 @@ export class BarComponentChart extends React.Component{
     }
 
     //creates summary of graph on last month (current)
-    createSummary = () => {
+    /*createSummary = () => {
     
         let lastObject = this.props.data.graphData
-        //console.log(lastObject, this.amountOfNodes)
-        let achieved = lastObject[this.amountOfNodes - 1]
-        let goal = this.props.data.goalGraphData[this.amountOfNodes - 1]
+        //console.log(lastObject, this.numberOfValues)
+        let achieved = lastObject[this.numberOfValues - 1]
+
+        console.log()
+        let goal = this.props.data.goalGraphData[this.numberOfValues - 1]
     
+        console.log("goal", goal);
+
         let styles = {}
     
         //reached goal true, else false
         if(achieved >= goal)
-            styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+            styles = {color:'#706D01',textAlign:'center',margin:30,fontFamily:'Arial Black'}
         else 
-            styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
+            styles= {color:'#B0252E',textAlign:'center',margin:30, fontFamily:'Arial Black'}
     
         return(
           <div style={styles}>
-            <h1>{this.months[this.amountOfNodes-1]}</h1>
+            <h1>{this.months[this.numberOfValues-1]}</h1>
             <p>{achieved + " of " + goal} </p>
             <p>{(achieved/goal).toFixed(4) * 100 + "%"}</p>
           </div>
         )
-    }
+    }*/
 
     //creates the summary of graph
     createSummary = () => {
@@ -91,20 +97,22 @@ export class BarComponentChart extends React.Component{
             lastObject = obj.graphData
         }
 
-        let achieved = lastObject[this.amountOfNodes - 1]
-        let goal = this.props.data.goalGraphData[this.amountOfNodes - 1]
+        let achieved = lastObject[this.numberOfValues - 1]
+        let goal = this.props.data.goalGraphData[this.numberOfValues - 1]
+
+        console.log("goal", this.props.data.goalGraphData);
 
         let styles = {}
 
         //reached goal true, else false
         if(achieved >= goal)
-        styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+        styles = {color:'#706D01',textAlign:'center',margin:30,fontFamily:'Arial Black'}
         else 
-        styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
+        styles= {color:'#B0252E',textAlign:'center',margin:30, fontFamily:'Arial Black'}
 
         return(
         <div style={styles}>
-            <h1>{this.months[this.amountOfNodes-1]}</h1>
+            <h1>{this.months[this.numberOfValues-1]}</h1>
             <p>{achieved + " of " + goal} </p>
             <p>{(achieved/goal).toFixed(4) * 100 + "%"}</p>
         </div>
@@ -114,7 +122,7 @@ export class BarComponentChart extends React.Component{
 
 
     renderDangerous = () => {
-        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeBarChart(200,200,this._values,true,true).outerHTML }} />;
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeBarChart(200,200,this._values,false,true).outerHTML }} />;
     }
 
     render(){

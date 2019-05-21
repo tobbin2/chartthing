@@ -401,13 +401,11 @@ export function makeHorizontalBarChartRedGreen(width, height, barData, doSort, s
             redWidth = (barData[i].goal - barData[i].value)*f;
         }
 
-        console.log("widths", {blueWidth,greenWidth,redWidth});
-
         var colors = graphColors(4);
 
-        svg.appendChild(makeRectangle(0,currentYPos,blueWidth, barHeight, colors[0]));
-        svg.appendChild(makeRectangle(blueWidth,currentYPos,redWidth, barHeight, "#ff0000"));
-        svg.appendChild(makeRectangle(blueWidth,currentYPos,greenWidth, barHeight, "#00ff00"));
+        svg.appendChild(makeRectangle(0,currentYPos,blueWidth, barHeight, "#1272A4"));
+        svg.appendChild(makeRectangle(blueWidth,currentYPos,redWidth, barHeight, "#B0252E"));
+        svg.appendChild(makeRectangle(blueWidth,currentYPos,greenWidth, barHeight, "#706D01"));
         
         if (showText){
             let valueText = makeText((barData[i].value*f)/2, currentYPos+barHeight/2, `white`);
