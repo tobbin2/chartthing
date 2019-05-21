@@ -6,10 +6,16 @@ import { randomBlue } from '../randomBlueFunction';
 
 const textStyleClass = {
   color:'#1C83B0',
-  fontFamily:'Lucida Console',
+  fontFamily:'Arial',
   fontWeight:1500,
   width:'100%',
-  marginBottom:'0'
+  
+  paddingRight:'10px',
+  marginTop: '12px'
+  
+  
+  
+  
 }
 
 export class LineComponent extends React.Component {
@@ -70,9 +76,9 @@ export class LineComponent extends React.Component {
 
     //reached goal true, else false
     if(achieved >= goal)
-      styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+      styles = {color:'green',textAlign:'center',margin:30,marginTop: 12,fontFamily:'Arial Black'}
     else 
-      styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
+      styles= {color:'red',textAlign:'center',margin:30,paddingBottom:'15px', marginTop: 12, fontFamily:'Arial Black'}
 
     return(
       <div style={styles}>
@@ -93,6 +99,7 @@ export class LineComponent extends React.Component {
               <Line
                   data={this._data}
                   options={{ legend:false, plugins:{datalabels:{display:false}}}}
+                  
               />
               </Row>
           </Column>

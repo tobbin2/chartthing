@@ -4,10 +4,11 @@ import { Row,Column } from 'simple-flexbox'
 
 const textStyleClass = {
     color:'#1C83B0',
-    fontFamily:'Lucida Console',
+    fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
-    marginBottom:'0'
+    marginTop: '12px',
+    marginBottom:'15px',
 }
 
 export class HorizontalBarComponentChart extends React.Component{
@@ -63,9 +64,9 @@ export class HorizontalBarComponentChart extends React.Component{
     
         //reached goal true, else false
         if(achieved >= goal)
-            styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+            styles = {color:'green',textAlign:'center',margin:30,paddingBottom:'15px',fontFamily:'Arial Black'}
         else 
-            styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
+            styles= {color:'red',textAlign:'center',margin:30,paddingBottom:'15px', fontFamily:'Arial Black'}
     
         return(
           <div style={styles}>
