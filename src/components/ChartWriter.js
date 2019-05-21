@@ -7,12 +7,14 @@ import { SampleTextComponent } from './chartComponents/SampleTextComponent'
 import { LineComponent } from './chartComponents/LineComponent'
 import { BarComponentChart } from './chartComponents/BarComponentCharts' 
 import { HorizontalStackerBarComponent } from './chartComponents/HorizontalStackedBarComponent'
+import { AccidentComponent} from './chartComponents/AccidentComponent'
 
 import { DoughnutComponentChart } from './otherChartComponents/DoughnutComponentChart'
 import { RadarComponentChart } from './otherChartComponents/RadarComponentChart'
 import { ArrowComponent } from './otherChartComponents/ArrowComponent'
 import { PolarareaComponentChart } from "./otherChartComponents/PolarareaComponentChart"
 import { GradientLineComponentChart } from './otherChartComponents/GradientLineComponentChart'
+
 
 const data = require('./object2.json')
 console.log(data);
@@ -98,6 +100,8 @@ export class ChartWriter extends React.Component {
                 return <BarComponentChart data={data} />
             case "horizontalStackedStaple":
                 return <HorizontalStackerBarComponent data={data} />
+            case "accident":
+                return <AccidentComponent data={data} />
             default:
                 return
         }
