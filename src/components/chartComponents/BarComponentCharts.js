@@ -103,7 +103,7 @@ export class BarComponentChart extends React.Component{
         if(achieved >= goal)
         styles = {color:'green',textAlign:'center',margin:30,paddingBottom: 15,marginTop: 12,fontFamily:'Arial Black'}
         else 
-        styles= {color:'red',textAlign:'center',margin:30,paddingBottom: 15, marginTop: 12,fontFamily:'Arial Black'}
+        styles= {color:'red',textAlign:'center',margin:30,paddingBottom: 15, fontFamily:'Arial Black'}
 
         return(
         <div style={styles}>

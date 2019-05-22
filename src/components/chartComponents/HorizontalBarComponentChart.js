@@ -9,6 +9,7 @@ const textStyleClass = {
     width:'100%',
     marginTop: '12px',
     marginBottom:'15px',
+    
 }
 
 export class HorizontalBarComponentChart extends React.Component{

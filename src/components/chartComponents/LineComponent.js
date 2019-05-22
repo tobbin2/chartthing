@@ -11,7 +11,8 @@ const textStyleClass = {
   width:'100%',
   
   paddingRight:'10px',
-  marginTop: '12px'
+  marginBottom: '12px',
+  marginRight:'164px'
   
   
   
