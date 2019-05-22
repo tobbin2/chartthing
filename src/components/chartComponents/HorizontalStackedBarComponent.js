@@ -70,7 +70,7 @@ export class HorizontalStackerBarComponent extends React.Component{
     }
 
     renderDangerous = () => {
-        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeHorizontalBarChartRedGreen(200,200,this.barData,true,true).outerHTML }} />;
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makeHorizontalBarChartRedGreen(200,200,this.barData,false,true).outerHTML }} />;
     }
 
     render() {
