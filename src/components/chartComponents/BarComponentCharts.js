@@ -8,7 +8,9 @@ const textStyleClass = {
     fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
-    marginBottom:'0'
+    marginBottom:'11px  ',
+    paddingRight:'10px',
+    marginTop: '12px'
 }
 
 export class BarComponentChart extends React.Component{

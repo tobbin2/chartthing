@@ -11,8 +11,10 @@ const textStyleClass = {
     fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
-    marginBottom:'0',
-    marginTop:"0"
+    marginBottom:'20px',
+    marginTop:"10px",
+   
+    
 }
 
 export class HorizontalStackerBarComponent extends React.Component{

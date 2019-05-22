@@ -15,7 +15,7 @@ import { PolarareaComponentChart } from "./otherChartComponents/PolarareaCompone
 import { GradientLineComponentChart } from './otherChartComponents/GradientLineComponentChart'
 
 const data = require('./object2.json')
-
+console.log(data);
 export class ChartWriter extends React.Component {
     values = {}
     
@@ -71,6 +71,7 @@ export class ChartWriter extends React.Component {
         
         return(finishedComponent)
     }
+    
 
     //switch case returns component depending of parameter type
     pickChartOrComponent = (type,data) => {
@@ -105,9 +106,15 @@ export class ChartWriter extends React.Component {
     render(){
         
         return(
-            <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
+           
+            
+             <Column flex={"1"} justifyContent="center" style={{padding:'2%',minHeight:'92vh'}}>
                 {this.values}
+                
             </Column>
+            
+            
+           
             
         )
     }

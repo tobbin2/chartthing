@@ -9,7 +9,13 @@ const textStyleClass = {
   fontFamily:'Arial',
   fontWeight:1500,
   width:'100%',
-  marginBottom:'0'
+  
+  paddingRight:'10px',
+  marginTop: '12px'
+  
+  
+  
+  
 }
 
 export class LineComponent extends React.Component {
