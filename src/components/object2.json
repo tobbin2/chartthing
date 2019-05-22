@@ -103,10 +103,11 @@
                     "primaryData": {
                         "data": [
                             {
-                            "graphData": [0,1,0,0]
+                                "graphData": [0,1,0,0],
+                                "label":"test3"
                             }
                         ],
-                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0],
+                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0,0,0],
                         "header": "Olyckor"
                     }
                 }
