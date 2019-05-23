@@ -3,7 +3,7 @@ import { Column, Row } from 'simple-flexbox'
 
 const textStyleClass = {
     color:'#1C83B0',
-    fontFamily:'Lucida Console',
+    fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
     marginBottom:'0',
@@ -81,7 +81,7 @@ export class AccidentComponent extends React.Component{
   
       //reached goal true, else false
       if(achieved <= goal)
-        styles = {color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
+        styles = {width:'200px',height:'200px',color:'green',textAlign:'center',margin:30,fontFamily:'Arial Black'}
       else 
         styles= {color:'red',textAlign:'center',margin:30, fontFamily:'Arial Black'}
 
@@ -95,26 +95,18 @@ export class AccidentComponent extends React.Component{
     }
   
     render() {
-        return(
-          <Row>
-            <Column>
-                {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-                <Row>              
-                    <Column justifyContent="center"  >
-                <div style={{marginTop: '40px', textAlign: 'center', fontFamily:'Verdana'}}>
-                      {this.createGraph()}
-                </div>                 
-                </Column>
-                </Row>
-            </Column>
-            <Column justifyContent="center">
-              {this.createSummary()}
-            </Column>
-          </Row>
-        )
-
-
-
+      return(
+        <Row>
+          <Column>
+            {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}              
+            {this.createGraph()}    
+            
+          </Column>
+          <Column justifyContent="center">
+            {this.createSummary()}
+          </Column>
+        </Row>
+      )
     }
 }
 
