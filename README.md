@@ -27,3 +27,11 @@ If the above doesn't work for some reason, go through the following steps:
 4. In the command promt, type "cd __paste path to directory here__".
 5. Run the command "npm install" to install the neccessary modules.
 6. When the installation is finished, run the command "npm start" to open up the application.
+
+**Editing the code**
+
+In the current state of the application, the data that is used can be found in object2.json.
+There is no API to get the data from the customers database.
+
+There are currently two versions. One uses the chart.js JavaScript library. And the other uses a custom made JavaScript svg-components.
+In the second version, the charts can be found in src/components/svgComponents/chart.js.
