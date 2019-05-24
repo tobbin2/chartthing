@@ -3,27 +3,24 @@
         {
             "columns":[
                 {
-                    "primary":"line",
+                    "primary":"bar",
                     "primaryData":
                     {
                         "data":[
                             {
                                 "graphData":["2.50","2.57","0.12","1.50"]
-                            },
-                            {
-                                "graphData":["2,1","2.5","2.0","0","0"]
                             }
                         ],
-                        "goalGraphData":["1.5","2","2","2","2","2","0","1.5","2","2","2","1"], "header":"Nya ordrar"
+                        "goalGraphData":["1.5","2","2","2"], "header":"Nya ordrar"
                     }
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"header":"försäljning per månad", "graphData":[98,102,100,99], "labels":["test1","test2","test3","test4","test5","test6","test7","test8","test9"], "goalGraphData":[100,100,100,100,100,100,100,100,100,100,100,100]}
+                    "primaryData":{"header":"Försäljning / månad", "values":[98,102,100,99], "labels":["test1","test2","test3","test4"], "goals":[100,100,100,100]}
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"header":"Resultat / månad", "graphData":["97","102","99","100","200","13","123","123"], "goalGraphData":["100","100","100","100","100","100","100","100","100","100","100","100"]}
+                    "primaryData":{"header":"Resultat / månad", "values":[97,102,99,100], "goals":[100,100,100,100]}
                 }
             ]
         },
@@ -34,13 +31,12 @@
                     "primaryData":{
                         "data":[
                             {
-                                "graphData":["97.3","96.1","97.1","96.8"] ,
+                                "graphData":["97.3","96.1","97.1","96.8"],
                                 "label":"test2"
-                                }
-                                ] , 
-                                "goalGraphData":["96","96","96","96","96","96","96","96","96","96","96","96"],
-                                "header":"Leveranssäkerhet"
-                                    }
+                            }
+                        ], 
+                        "goalGraphData":["96","96","96","96"], "header":"Leveranssäkerhet"
+                    }
                 },
                 {
                     "primary":"line",
@@ -51,7 +47,7 @@
                                 "label":"test1"
                             }
                         ],
-                        "goalGraphData":[7,7,7,7,7,7,7,7,7,7,7,7],
+                        "goalGraphData": 7,
                         "header":"Reklamationer"
                     }
                 },
@@ -64,7 +60,7 @@
                                 "label":"test1"
                             }
                         ],
-                        "goalGraphData":[0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25],
+                        "goalGraphData": 0.25,
                         "header":"Destruktion"
                     }
                 }
@@ -81,7 +77,7 @@
                                 "label":"test2"
                             }
                         ],
-                        "goalGraphData":[14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50,14.50],
+                        "goalGraphData": 14.50,
                         "header":"Elförbrukning"
                     }
                 },
@@ -94,7 +90,7 @@
                                 "label":"test2"
                             }
                         ],
-                        "goalGraphData":[33333,33333,33333,33333,33333,33333,33333,33333,33333,33333,33333,33333],
+                        "goalGraphData": 33333,
                         "header":"Extra Frakter i Sek"
                     }
                 },
@@ -103,10 +99,11 @@
                     "primaryData": {
                         "data": [
                             {
-                            "graphData": [0,1,0,0]
+                                "graphData": [0,1,0,0],
+                                "label":"test3"
                             }
                         ],
-                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0],
+                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0,0,0],
                         "header": "Olyckor"
                     }
                 }

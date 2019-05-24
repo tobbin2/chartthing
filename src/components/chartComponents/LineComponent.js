@@ -1,112 +1,110 @@
 import * as React from "react";
 import { Line } from "react-chartjs-2";
 import { Column, Row } from "simple-flexbox";
-
-import { randomBlue } from '../randomBlueFunction';
+import { makeLineChart } from '../svgComponents/chart.js'
 
 const textStyleClass = {
-  color:'#1C83B0',
-  fontFamily:'Arial',
-  fontWeight:1500,
-  width:'100%',
-  
-  paddingRight:'10px',
+  color: '#1272A4',
+  fontFamily: 'Arial',
+  fontWeight: 1500,
+  fontSize: 35,
+  width: '100%',
+  marginBottom: '11px',
+  paddingRight: '10px',
   marginTop: '12px'
-  
-  
-  
-  
 }
 
 export class LineComponent extends React.Component {
 
   _data = {};
-  amountOfNodes = 0
-  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Okt","Nov","Dev"]
+  _coords = [];
+  numberOfValues = 0;
+  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(props) {
     super(props);
 
-    let colors = []
-        
-    //loops through amount of values, appends color for each and changes amountOfNodes to represent length of xAxis. 
-    for(let i= 0 ; i < this.props.data.data.length;i++){
-      colors.push(randomBlue(5 * i))
-      if(this.props.data.data[i].graphData.length > this.amountOfNodes)
-        this.amountOfNodes = this.props.data.data[i].graphData.length
-    }
+    this.numberOfValues = this.props.data.data[0].graphData.length;
 
     //appends data to public variabe _data, which is the data of the graph. (loops through object sent in)
     this._data = {
-      labels: this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0,this.amountOfNodes+1),
-      datasets: this.props.data.data.map( (object,index) => {
-        return({
+      labels: this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0, this.numberOfValues + 1),
+      datasets: this.props.data.data.map((object, index) => {
+        return ({
           label: object.label,
-          borderColor: colors[index],
-          fill:false,
+          fill: false,
           borderWidth: 3,
           data: object.graphData
         })
-      }).concat({label: "goal", borderColor: "gray", fill:false,borderWidth:3,data: this.props.data.goalGraphData})
+      }).concat({ label: "goal", borderColor: "gray", fill: false, borderWidth: 3, data: this.props.data.goalGraphData })
     };
+
+    //console.log(`data`,this._data);
+
+    for (let i = 0; i < this._data.datasets[0].data.length; i++) {
+      this._coords.push({
+        x: i,
+        y: this._data.datasets[0].data[i]
+      })
+    }
+    //console.log(`coords`,this._coords)
   }
 
   createHeader = (text) => {
-    return(
-        <Row>
-            <h2 style={textStyleClass}>{text}</h2>
-        </Row>
+    return (
+      <Row>
+        <h2 style={textStyleClass}>{text}</h2>
+      </Row>
     )
   }
 
   //creates the summary of graph
   createSummary = () => {
-    
+
     let lastObject = []
 
-    for(let obj of this.props.data.data){
-      if(lastObject.length < obj.graphData.length)
+    for (let obj of this.props.data.data) {
+      if (lastObject.length < obj.graphData.length)
         lastObject = obj.graphData
     }
 
-    let achieved = lastObject[this.amountOfNodes - 1]
-    let goal = this.props.data.goalGraphData[this.amountOfNodes - 1]
+    let achieved = lastObject[this.numberOfValues - 1]
+    let goal = this.props.data.goalGraphData;
 
     let styles = {}
 
     //reached goal true, else false
-    if(achieved >= goal)
-      styles = {color:'green',textAlign:'center',margin:30,marginTop: 12,fontFamily:'Arial Black'}
-    else 
-      styles= {color:'red',textAlign:'center',margin:30,paddingBottom:'15px', marginTop: 12, fontFamily:'Arial Black'}
+    if (achieved >= goal)
+      styles = { color: '#0FA34D', textAlign: 'center', margin: 30, fontFamily: 'Arial Black' }
+    else
+      styles = { color: '#d82020', textAlign: 'center', margin: 30, fontFamily: 'Arial Black' }
 
-    return(
+    return (
       <div style={styles}>
-        <h1>{this.months[this.amountOfNodes-1]}</h1>
+        <h1>{this.months[this.numberOfValues - 1]}</h1>
         <p>{achieved + " of " + goal} </p>
-        <p>{(achieved/goal).toFixed(4) * 100 + "%"}</p>
+        <p>{(achieved / goal).toFixed(4) * 100 + "%"}</p>
       </div>
     )
-  
+  }
+
+  renderDangerous = () => {
+    return <div style={{ marginTop: '4px' }} dangerouslySetInnerHTML={{ __html: makeLineChart(200, 200, [this._coords], this._data.datasets[1].data).outerHTML }} />;
   }
 
   render() {
-      return(
-        <Row>
-          <Column>
-              {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
-              <Row>
-              <Line
-                  data={this._data}
-                  options={{ legend:false, plugins:{datalabels:{display:false}}}}
-                  
-              />
-              </Row>
-          </Column>
-          <Column justifyContent="center">
-            {this.createSummary()}
-          </Column>
-        </Row>
-      )
-  }   
+    return (
+      <Row>
+        <Column justifyContent="center">
+          {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
+          <Row>
+            {this.renderDangerous()}
+          </Row>
+        </Column>
+        <Column justifyContent="center">
+          {this.createSummary()}
+        </Column>
+      </Row>
+    )
+  }
 } 

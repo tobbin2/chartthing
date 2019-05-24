@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-export class SampleTextComponent extends React.Component{
+export class SampleTextComponent extends React.Component {
 
     components = null
     alignText = 'left'
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        if(this.props.data.align)
+        if (this.props.data.align)
             this.alignText = this.props.data.align
 
         /*
@@ -20,8 +20,8 @@ export class SampleTextComponent extends React.Component{
             if the order is another way will that order result in that way, user can also add alignItems which sets the alignment of 
             all components inside this component to that alignment. (left == default)
         */
-        this.components = Object.keys(this.props.data).map( (key) => {
-            switch(key){
+        this.components = Object.keys(this.props.data).map((key) => {
+            switch (key) {
                 case 'header':
                     return this.createHeader(this.props.data[key])
                 case 'percentage':
@@ -36,27 +36,27 @@ export class SampleTextComponent extends React.Component{
 
     //creates header
     createHeader = (text) => {
-        return(
-            <h1 style={{color:'#1C83B0',marginTop: 12,fontFamily:'Verdana',fontWeight:400, textAlign:this.alignText}}>{text}</h1>
+        return (
+            <h1 style={{ color: '#1C83B0', marginTop: 12, fontFamily: 'Arial', fontWeight: 400, textAlign: this.alignText }}>{text}</h1>
         )
     }
 
     //creates percentage text
     createPercentage = (text) => {
-        return(
-            <h1 style={{color:'#1C83B0',marginTop: 12,fontSize:55,margin:0,fontWeight:600,fontFamily:'Verdana', textAlign:this.alignText}}>{text}</h1>
+        return (
+            <h1 style={{ color: '#1C83B0', marginTop: 12, fontSize: 55, margin: 0, fontWeight: 600, fontFamily: 'Arial', textAlign: this.alignText }}>{text}</h1>
         )
     }
 
     //creates normal text
     createText = (text) => {
-        return(
-            <p style={{color:'#1C83B0',marginTop: 12,fontFamily:'Arial', wordWrap:'break-word',maxWidth:'35vh',fontWeight:300, textAlign:this.alignText}}>{text}</p>
+        return (
+            <p style={{ color: '#1C83B0', marginTop: 15, fontFamily: 'Arial', wordWrap: 'break-word', maxWidth: '35vh', fontWeight: 300, textAlign: this.alignText }}>{text}</p>
         )
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 {this.components}
             </div>

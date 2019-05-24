@@ -1,8 +1,10 @@
-import * as React from 'react'
+import * as React from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Column, Row} from 'simple-flexbox'
+import { Column, Row} from 'simple-flexbox';
+// eslint-disable-next-line
+import { makePieChart } from "../svgComponents/chart.js";
 
-import { randomBlue } from '../randomBlueFunction'
+import { randomBlue } from '../randomBlueFunction';
 
 const textStyleClass = {
     color:'#1C83B0',
@@ -16,6 +18,7 @@ const textStyleClass = {
 export class PieComponentChart extends React.Component {
 
     _data = {}
+    _pieChartData = []
     constructor(props){
         super(props)
         let colors = []
@@ -32,6 +35,13 @@ export class PieComponentChart extends React.Component {
                 backgroundColor: colors
             }]
         }
+
+        for(let i = 0 ; i < this.props.data.data.length; i++){
+            this._pieChartData.push({
+                name:this.props.data.labels[i],
+                value:this.props.data.data[i]
+            })
+        }
     }
 
     createHeader = (text) => {
@@ -42,17 +52,20 @@ export class PieComponentChart extends React.Component {
         )
     }
 
+    renderDangerous = () => {
+        return <div style={{marginTop:'4px'}} dangerouslySetInnerHTML={{__html: makePieChart(200,200,this._pieChartData,false,true).outerHTML}} />;
+    }
+    
+
     render(){
+        let a = React.createElement("html")
 
         return(
            <Column>
                 {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>
-                    <Pie
-                        data={this._data}
-                        options={{maintainAspectRatio:true,devicePixelRatio:1,responsive:true}}      
-                                    
-                    />
+                    {this.renderDangerous()}
+                    
                 </Row>
             </Column>
         )
