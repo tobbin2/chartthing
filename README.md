@@ -12,6 +12,7 @@ The application is still a work in progress and does not fulfill the demands of 
 ## How to use
 
 **Running the app**
+
 Start by downloading the code to your computer.
 Then download node.js from https://nodejs.org/en/.
 
