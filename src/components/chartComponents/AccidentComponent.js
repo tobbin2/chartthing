@@ -6,8 +6,9 @@ const textStyleClass = {
     fontFamily:'Lucida Console',
     fontWeight:1500,
     width:'100%',
-    marginBottom:'0',
-    marginTop:"0"
+    marginBottom:'0px',
+    marginTop:"0px"
+
 }
 
 export class AccidentComponent extends React.Component{
@@ -37,37 +38,7 @@ export class AccidentComponent extends React.Component{
   
 }  
       
-    createGraph = () => {
-
-      var sumObject = []
-      
-      for(let obj of this.props.data.data){
-        if(sumObject.length < obj.graphData.length)
-         sumObject.push(obj.graphData)
-      }   
-      console.log(sumObject.sumObject)
-
-        return(
-          <div>
-            <table>
-            <tr>
-            <th>
-            <h3>{this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0,this.amountOfNodes+1)}</h3>
-            </th>
-            <th>
-            <p>{sumObject } </p>
-            
-            </th>
-            </tr>
-            
-            
-            
-            </table>
-            
-          </div>
-          
-        ) 
-    }
+   
 
     createHeader = (text) => {
       return(
@@ -114,9 +85,7 @@ export class AccidentComponent extends React.Component{
                 {this.props.data.header !== undefined ? this.createHeader(this.props.data.header) : null}
                 <Row>              
                     <Column justifyContent="center"  >
-                <div style={{marginTop: '40px', textAlign: 'center', fontFamily:'Verdana'}}>
-                      {this.createGraph()}
-                </div>                 
+                              
                 </Column>
                 </Row>
             </Column>
