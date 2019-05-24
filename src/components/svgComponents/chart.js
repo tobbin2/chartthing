@@ -191,7 +191,7 @@ export function makeBarChart(totalWidth,height,barDataPoints,doSort,showText){
         if(a<b){
             color = "#1272A4";
         } else {
-            color = "#B0252E";
+            color = "#d82020";
         };
 
         return color;

@@ -16,7 +16,7 @@
                 },
                 {
                     "primary":"horizontalStackedStaple",
-                    "primaryData":{"header":"Försäljning per månad", "values":[98,102,100,99], "labels":["test1","test2","test3","test4"], "goals":[100,100,100,100]}
+                    "primaryData":{"header":"Försäljning / månad", "values":[98,102,100,99], "labels":["test1","test2","test3","test4"], "goals":[100,100,100,100]}
                 },
                 {
                     "primary":"horizontalStackedStaple",
@@ -99,10 +99,11 @@
                     "primaryData": {
                         "data": [
                             {
-                                "graphData": [0,1,0,0]
+                                "graphData": [0,1,0,0],
+                                "label":"test3"
                             }
                         ],
-                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0],
+                        "goalGraphData": [0,0,0,0,0,0,0,0,0,0,0,0],
                         "header": "Olyckor"
                     }
                 }
