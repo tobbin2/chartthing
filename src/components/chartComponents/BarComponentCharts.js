@@ -8,9 +8,9 @@ const textStyleClass = {
     fontFamily:'Arial',
     fontWeight:1500,
     width:'100%',
-    marginBottom:'11px  ',
+    marginBottom:'10px  ',
     paddingRight:'10px',
-    marginTop: '12px'
+    marginTop: '17px'
 }
 
 export class BarComponentChart extends React.Component{
@@ -71,7 +71,7 @@ export class BarComponentChart extends React.Component{
     
         //reached goal true, else false
         if(achieved >= goal)
-            styles = {color:'green',textAlign:'center',margin:30, paddingBottom: 15,marginTop: 12 ,fontFamily:'Arial Black'}
+            styles = {color:'green',textAlign:'center',margin:30, paddingBottom: 15,marginTop: '50px' ,fontFamily:'Arial Black'}
         else 
             styles= {color:'red',textAlign:'center',margin:30, paddingBottom: 15,marginTop: 12, fontFamily:'Arial Black'}
     

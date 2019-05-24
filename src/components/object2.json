@@ -3,7 +3,7 @@
         {
             "columns":[
                 {
-                    "primary":"line",
+                    "primary":"bar",
                     "primaryData":
                     {
                         "data":[
