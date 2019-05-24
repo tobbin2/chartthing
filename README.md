@@ -33,5 +33,5 @@ If the above doesn't work for some reason, go through the following steps:
 In the current state of the application, the data that is used can be found in object2.json.
 There is no API to get the data from the customers database.
 
-There are currently two versions. One uses the chart.js JavaScript library. And the other uses a custom made JavaScript svg-components.
-In the second version, the charts can be found in src/components/svgComponents/chart.js.
+There are currently two versions. One uses custom made JavaScript svg-components, and the other uses the chart.js JavaScript library.
+In the first version, the charts can be found in src/components/svgComponents/chart.js.
