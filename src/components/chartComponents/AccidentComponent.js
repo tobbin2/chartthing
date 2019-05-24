@@ -49,8 +49,21 @@ export class AccidentComponent extends React.Component{
 
         return(
           <div>
+            <table>
+            <tr>
+            <th>
             <h3>{this.props.data.labels !== undefined ? this.props.data.labels : this.months.slice(0,this.amountOfNodes+1)}</h3>
+            </th>
+            <th>
             <p>{sumObject } </p>
+            
+            </th>
+            </tr>
+            
+            
+            
+            </table>
+            
           </div>
           
         ) 
