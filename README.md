@@ -36,3 +36,9 @@ There is no API to get the data from the customers database.
 
 There are currently two versions. One uses custom made JavaScript svg-components, and the other uses the chart.js JavaScript library.
 In the first version, the charts can be found in src/components/svgComponents/chart.js.
+
+**Branches**
+
+The version using svg-charts is V.svg-chart.
+The version using chart.js is V.chart.js.
+The latest version using svg-charts was merged into master.
